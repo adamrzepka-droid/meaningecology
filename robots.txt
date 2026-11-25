@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://adamrzepka-droid.github.io/meaningecology/sitemap.xml

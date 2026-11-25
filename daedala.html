@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Daedala</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a single turning globe carries the argument; the assumptions sit beside it as switches, the clock beneath.
+   Single dark look by choice: filaments are light on a night ground. */
+:root{
+  color-scheme:dark;
+  --ground:#0a0c08; --panel:#14180f; --line:#2a3122; --ink:#e6e6d6; --muted:#a3a88f; --dim:#6f755f;
+  --flat:#d8cfa6; --sea-a:#0d1f26; --sea-b:#081217;
+  --display:"Newsreader",Georgia,serif; --body:"IBM Plex Sans",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+html,body{background:var(--ground)}
+body{color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.5}
+.wrap{max-width:1160px;margin:0 auto;padding-block:26px 40px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:20px}
+.tag{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--flat);border:1px solid var(--line);padding:3px 8px;border-radius:2px;align-self:flex-start}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(1.7rem,3.4vw,2.5rem);line-height:1.1;margin:0;text-wrap:balance}
+.lede{max-width:62ch;color:var(--muted);margin:0}
+.sub2{font:500 .74rem var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0}
+.stage{display:grid;grid-template-columns:minmax(0,1fr) minmax(240px,300px);gap:22px;align-items:start}
+.globe{min-width:0;display:flex;flex-direction:column;gap:12px}
+canvas{display:block;width:100%;max-width:720px;aspect-ratio:1;margin:0 auto;touch-action:none;cursor:grab}
+canvas:active{cursor:grabbing}
+.clock{display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px;border-block:1px solid var(--line);padding-block:10px}
+.year{font-family:var(--mono);font-weight:500;font-size:1.8rem;font-variant-numeric:tabular-nums;min-width:4.2ch}
+button{font:500 .78rem var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink);background:var(--panel);border:1px solid var(--line);padding:8px 12px;border-radius:2px;cursor:pointer}
+button:hover{border-color:var(--muted)}
+button[aria-pressed="true"]{background:var(--ink);color:var(--ground);border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--flat);outline-offset:2px}
+.clock input[type=range]{flex:1 1 220px;min-width:0;accent-color:var(--flat)}
+.side{display:flex;flex-direction:column;gap:18px;min-width:0}
+.group{display:flex;flex-direction:column;gap:7px}
+.group h2{font-family:var(--mono);font-weight:500;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0}
+.group p{margin:0;color:var(--dim);font-size:.86rem}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{flex:1 1 auto}
+.side input[type=range]{width:100%;margin:0;accent-color:var(--flat)}
+.poles{display:flex;justify-content:space-between;gap:10px;font:400 .72rem var(--mono);color:var(--muted)}
+details summary{font:500 .68rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--dim);cursor:pointer;width:max-content}
+details summary:hover{color:var(--muted)}
+details p{margin:6px 0 0;color:var(--muted);font-size:.84rem}
+details a{color:var(--ink)}
+.notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px 26px;border-top:1px solid var(--line);padding-top:16px}
+.notes h2{font-family:var(--mono);font-weight:500;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 5px}
+.notes p{margin:0;color:var(--muted);max-width:58ch}
+.notes b{color:var(--ink);font-weight:500}
+@media (max-width:820px){.stage{grid-template-columns:1fr}}
+</style>
+</head>
+<body style="margin:0">
+<div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 26px;padding:20px max(16px,4vw) 0;max-width:1160px;margin:0 auto;font:500 .72rem 'IBM Plex Mono',ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase">
+  <a href="index.html" style="color:#a3a88f;text-decoration:none">← Institute for the Ecology of Meaning</a>
+  <span style="display:flex;flex-wrap:wrap;gap:8px 26px"><a href="mission.html" style="color:#e6e6d6;text-decoration:none">Mission</a><a href="archival-intelligence.html" style="color:#e6e6d6;text-decoration:none">Archival Intelligence</a><a href="daedala.html" style="color:#e6e6d6;text-decoration:none">Daedala</a><a href="contact.html" style="color:#e6e6d6;text-decoration:none">Contact</a></span>
+</div>
+<div class="wrap">
+  <span class="tag">Prototype · mostly placeholder values</span>
+  <h1>Daedala</h1>
+  <p class="sub2">A research vessel for the ecology of meaning</p>
+  <p class="lede">Daedala is a speculative instrument. It gathers what research can currently say about how generative AI affects the variety of human expression, and draws the futures that follow. As new studies arrive, its settings change. It shows possible scenarios, not a forecast. The name is Lucretius’s word for the inventive variety of nature.</p>
+  <p class="sub2" style="color:var(--ink)">The living network of meaning, 2026 to 2100</p>
+  <p class="lede">Filaments are the channels through which people make and pass meaning. Their colours are variety; their fine branching is local difference. Turn the globe, change the assumptions, and watch what the network becomes.</p>
+
+  <div class="stage">
+    <div class="globe">
+      <canvas id="g" role="img" aria-label="Rotating globe covered by a branching network whose colours and fine branches change over time"></canvas>
+      <div class="clock">
+        <span class="year" id="yr">2026</span>
+        <button id="play" type="button">Pause</button>
+        <input id="year" type="range" min="2026" max="2100" step="1" value="2026" aria-label="Year">
+      </div>
+    </div>
+
+    <div class="side">
+      <div class="group"><h2>Futures</h2>
+        <div class="seg" id="presets">
+          <button type="button" data-a="0" data-n="0" data-e="0" data-k="0">Coexistence</button>
+          <button type="button" data-a="0" data-n="1" data-e="1" data-k="1">Slow erosion</button>
+          <button type="button" data-a="1" data-n="0" data-e="0" data-k="0">Abundance</button>
+          <button type="button" data-a="1" data-n="1" data-e="1" data-k="1" data-c="1">Monoculture</button>
+          <button type="button" data-a="1" data-n="1" data-e="1" data-k="1" data-c="0">Archipelago</button>
+        </div></div>
+      <div class="group"><h2>Automated share of production</h2>
+        <input type="range" id="sA" min="0" max="100" step="1" value="100" aria-label="Automated share of production, from small to large">
+        <div class="poles"><span>Small · 30%</span><span>Large · 85%</span></div>
+        <details><summary>Basis</summary><p>No study fixes where this ends up; both ends are assumptions. Each region’s starting point is real: the automated share of its web traffic, from Cloudflare Radar. Adoption by country follows <a href="https://doi.org/10.1016/j.worlddev.2025.107260" target="_blank" rel="noopener">Liu &amp; Wang 2026</a>.</p></details></div>
+      <div class="group"><h2>Narrowing per pass</h2>
+        <input type="range" id="sN" min="0" max="100" step="1" value="100" aria-label="Narrowing per pass, from a sixth to a half">
+        <div class="poles"><span>By a sixth</span><span>By half</span></div>
+        <details><summary>Basis</summary><p><a href="https://arxiv.org/abs/2502.11266" target="_blank" rel="noopener">Sourati et al. 2025</a>: when AI rewrote people’s texts, variety of style fell by 16 to 51 per cent. Moon et al. (preprint): in 372,793 admissions essays, variety of words rose while variety of ideas fell.</p></details></div>
+      <div class="group"><h2>Erosion of independent capacity</h2>
+        <input type="range" id="sE" min="0" max="100" step="1" value="100" aria-label="Erosion of independent capacity, from slow to fast">
+        <div class="poles"><span>Slow · 2% a year</span><span>Fast · 10% a year</span></div>
+        <details><summary>Basis</summary><p><a href="https://arxiv.org/abs/2605.21629" target="_blank" rel="noopener">Rismanchian et al. 2026</a>: students’ time on AI-solvable problems fell 2.8 per cent a quarter, and retention fell with it. Strömberg, Lei &amp; Wu 2026 (CEPR DP21577): exam scores down a fifth within six months. <a href="https://arxiv.org/abs/2604.04721" target="_blank" rel="noopener">Liu et al. 2026</a>: worse performance alone after ten minutes of help. The slow end is an assumption.</p></details></div>
+      <div class="group"><h2>Confidence</h2>
+        <input type="range" id="sK" min="0" max="100" step="1" value="100" aria-label="Confidence, from calibrated to inflated">
+        <div class="poles"><span>Calibrated</span><span>Inflated</span></div>
+        <details><summary>Basis</summary><p>Shaw &amp; Nave 2026 (working paper): people followed a deliberately wrong AI four times in five, and their confidence rose and did not fall as errors mounted. That calibrated confidence acts as a brake is an assumption.</p></details></div>
+      <div class="group"><h2>Concentration</h2>
+        <input type="range" id="sC" min="0" max="100" step="1" value="100" aria-label="Concentration, from many systems to a few">
+        <div class="poles"><span>Many systems</span><span>A few</span></div>
+        <details><summary>Basis</summary><p>An assumption at both ends. With a few systems, everything routes through the same hubs and settles on one colour. With many systems and inflated confidence, each seals itself off: the strands between them die and the branches loop back on themselves.</p></details></div>
+      <div class="group"><h2>Refugia</h2>
+        <input type="range" id="sR" min="0" max="100" step="1" value="0" aria-label="Refugia, from none to three in ten">
+        <div class="poles"><span>None</span><span>Three in ten</span></div>
+        <details><summary>Basis</summary><p>The share working under protected conditions, which keeps its colour. In Strömberg et al. about a fifth of users kept working as before and lost little; in Shaw &amp; Nave people overrode a wrong AI one time in five; in Rismanchian et al. the effect vanished under proctoring.</p></details></div>
+    </div>
+  </div>
+
+  <div class="notes">
+    <div><h2>How to read it</h2><p><b>Colour</b> is variety: each filament line begins with its own hue, spread in proportion to a region's linguistic diversity. <b>Brightness</b> is activity: web traffic per person online, on a compressed scale. <b>Fine branches</b> are local difference in ideas; as meaning flattens they fade and the trunks thicken. <b>The fuzz</b> is variety of words, which survives: a flattened region stays lush but turns one colour.</p></div>
+    <div><h2>What moves it</h2><p>Each year a region changes by its <b>automated share</b> times its <b>share of people online</b> times the assumed <b>narrowing</b>. As independent capacity erodes, reliance grows and the loss deepens. <b>Confidence</b> decides whether that loop can be broken: when calibrated, noticed loss slows the erosion and lets capacity recover; when inflated, the loss goes unseen, and the network glows brighter as it bleaches. The most linguistically diverse regions are reached later but fall faster. Regions with more automated traffic today meet the automation curve sooner. Concentration speeds the change and decides where the long strands run.</p></div>
+    <div><h2>Status</h2><p>An illustration of an argument, not a measurement. The network is grown at random over a coarse map, and three starting values are real: share of people online (World Bank, from ITU figures), and traffic per person and automated share of traffic (Cloudflare Radar). Linguistic diversity is a stand-in chosen by eye. The settings are tethered to studies but interpreted freely: these are possible scenarios, not projections.</p></div>
+    <div><h2>Studies behind the settings</h2><p><b>Narrowing:</b> Sourati et al. 2025; Moon et al. (words diversify while ideas converge). <b>Erosion:</b> Rismanchian et al. 2026; Strömberg, Lei &amp; Wu 2026; Liu et al. 2026. <b>Confidence:</b> Shaw &amp; Nave 2026. <b>Refugia:</b> Rismanchian et al.; Strömberg et al.; Shaw &amp; Nave 2026 (people overrode a faulty AI about one time in five). Most are preprints, not yet peer reviewed.</p></div>
+  </div>
+</div>
+<script>
+(function(){
+const MASK=`.....................#......#....#....###############.........................................###.......................
+...................##.......#.#.#........############.........................#........#.########..........#............
+...................#.####...#.######.....###########..........................#....####################..#####..........
+.....#####################.###....####.....########...............######........####.###################################
+###..###########################....###...######................########################################################
+......########################.##...##.....###.......#.........####.###################################################.
+.....########################.....##........##................####.#############################################.####...
+.......##.....###############.....#####.......................#.##..#######################################......#......
+................###############...######..................#........#######################################......##......
+.................################.#######................#.#..#############################################.....#.......
+..................#######################....................###############################################............
+...................###################...#.................################################################.............
+...................####################.....................##########.#.#################################..............
+...................#################.....................####...#.###.....###############################..#............
+...................################......................###.....######################################.................
+...................################......................###.......#.###############################..#...#.............
+....................##############........................######........############################..#..#..............
+.....................############........................########..#....############################...#................
+......................########.##........................############################################...................
+......................######....#.......................###############.####..######################....................
+........................###............................######################.#...##################....................
+.........................##...........................##################.#######...###############......................
+.........................###..#.....#..................#################..#####.....####...####.#.......................
+...........................####........................##################.####......###....#####....#...................
+.............................###......................######################.........##......###........................
+...............................#.......................###################...........##.......##........................
+................................#..#####................#####################........#...............#..................
+..................................#######...............####################.................#..........................
+..................................#########....................#############................#.....#.....................
+..................................#########....................############..................#...##.....................
+.................................############..................###########...................##.###.....#...............
+.................................##############.................#########.....................#..........###............
+.................................###############................#########......................#..........###...........
+..................................##############................#########..................................#.#..........
+..................................##############.................########...............................................
+...................................############.................##########..#..........................##..#............
+....................................###########.................#########..##........................#####.##...........
+.....................................##########.................########...#........................#########...........
+.....................................#########...................#######..##......................############..........
+.....................................#######.....................######....#......................#############.........
+....................................########.....................######...........................#############.........
+....................................#######.......................####............................#############.........
+....................................#######.......................####.............................###..#######.........
+....................................#####.................................................................####..........
+...................................######..................................................................###........#.
+...................................####...............................................................................#.
+....................................##......................................................................#........#..
+...................................###..............................................................................#...
+...................................###..................................................................................
+...................................##...................................................................................
+....................................#...................................................................................
+........................................................................................................................`.split("\n"), W=120, H=52, D2R=Math.PI/180;
+// Regional values. on = share of people online: REAL (World Bank / ITU, population-weighted, fetched 25 Nov 2026; refreshed from DATA_URL when set).
+// PLACEHOLDERS: div = linguistic diversity, hue = palette centre, sys = which of six systems serves it.
+const R={na:{div:.35,on:.947,hue:150,sys:0},la:{div:.55,on:.814,hue:108,sys:0},we:{div:.30,on:.923,hue:168,sys:1},ne:{div:.30,on:.898,hue:305,sys:2},
+  me:{div:.40,on:.696,hue:44,sys:1},af:{div:.90,on:.333,hue:26,sys:3},sa:{div:.85,on:.652,hue:338,sys:4},ea:{div:.50,on:.881,hue:16,sys:5},
+  se:{div:.90,on:.756,hue:90,sys:5},ng:{div:1,on:.196,hue:120,sys:3},oc:{div:.45,on:.943,hue:158,sys:0}};
+// REAL (Cloudflare Radar, 28 days to 25 Nov 2026): tp = share of world web traffic per million people online; au = automated share of the region's traffic.
+const BASE={na:[9.25,.541],la:[1.70,.207],we:[4.42,.416],ne:[1.05,.255],me:[.854,.223],af:[.469,.176],sa:[.535,.164],ea:[.603,.358],se:[1.72,.342],ng:[.5,.175],oc:[4.55,.283]};
+for(const k in R){R[k].tp=BASE[k][0]; R[k].au=BASE[k][1];}
+// Brightness uses a compressed (square-root) scale so that low-traffic regions stay visible.
+function norm(){let m=0; for(const k in R) m=Math.max(m,R[k].tp); for(const k in R) R[k].tr=Math.sqrt(R[k].tp/m);}
+norm();
+// Biological range: fungal violet and pink, rust, amber, lichen, moss, fern, blue-green. Hues are folded back into it (no pure blues).
+const SYS_H=[22,48,285,110,325,172], FLAT_H=48;
+const unf=h=>{h=((h%360)+360)%360; return h>238?h-360:h;};
+const bio=h=>{const x=((h+65)%494+494)%494; return ((x>247?494-x:x)-65+360)%360;};
+function region(lon,lat){
+  if(lon>=130&&lat<1&&lat>-13&&!(lon<155&&lat<-10)) return 'ng';
+  if(lon>=110&&lat<-9) return 'oc';
+  if(lon<-30) return lat<28?'la':'na';
+  if(lon>=92&&lon<142&&lat<20) return 'se';
+  if(lon>=62&&lon<92&&lat<36) return 'sa';
+  if(lon>=92&&lat<48) return 'ea';
+  if(lon>=-20&&lon<62&&lat<14) return 'af';
+  if(lon>=-20&&lon<62&&lat<38) return 'me';
+  if(lon<28&&lat>=36) return 'we';
+  return 'ne';
+}
+let seed=11; const rnd=()=>{seed=(seed*1664525+1013904223)>>>0; return seed/4294967296;};
+// ---- nodes on the sphere
+const idx=new Int32Array(W*H).fill(-1), nodes=[];
+for(let j=0;j<H;j++)for(let i=0;i<W;i++) if(MASK[j][i]==='#'){
+  const lon=(-180+(i+.5)*3+(rnd()-.5)*2.7)*D2R, lat=(78-(j+.5)*135/H+(rnd()-.5)*2.3)*D2R, r=region(lon/D2R,lat/D2R);
+  idx[j*W+i]=nodes.length;
+  nodes.push({i,j,r,X:Math.cos(lat)*Math.sin(lon),Y:Math.sin(lat),Z:Math.cos(lat)*Math.cos(lon),par:-1,hue:0,size:1,seed:false,
+    ph:rnd()*6.283,sp:.6+rnd()*.9,lag:rnd(),ref:rnd(),kids:0});
+}
+// ---- grow a branching forest over the land: long filaments that fork, like hyphae
+const order=[], frontier=[];
+const byReg={}; nodes.forEach((n,k)=>{(byReg[n.r]=byReg[n.r]||[]).push(k);});
+const seeds=[];
+for(const r in byReg){const list=byReg[r], ns=Math.max(1,Math.round(list.length/55));
+  for(let s=0;s<ns;s++){const k=list[Math.floor(rnd()*list.length)], n=nodes[k]; if(n.seed) continue;
+    n.seed=true; n.vis=true; n.hue=bio(unf(R[r].hue)+(rnd()-.5)*190*R[r].div); seeds.push(k); frontier.push(k); order.push(k);}}
+function nbrs(n){const out=[]; for(let dj=-1;dj<=1;dj++)for(let di=-1;di<=1;di++){ if(!di&&!dj) continue; const j=n.j+dj; if(j<0||j>=H) continue;
+  const i=(n.i+di+W)%W, k=idx[j*W+i]; if(k>=0&&!nodes[k].vis) out.push(k);} return out;}
+while(frontier.length){
+  const pick=frontier.length-1-Math.floor(Math.pow(rnd(),1.6)*Math.min(frontier.length,14)), k=frontier[pick], n=nodes[k], nb=nbrs(n);
+  if(!nb.length){frontier.splice(pick,1); continue;}
+  const c=nb[Math.floor(rnd()*nb.length)], m=nodes[c];
+  m.vis=true; m.par=k; m.hue=bio(unf(n.hue)+(unf(R[m.r].hue)-unf(n.hue))*.08+(rnd()-.5)*30*R[m.r].div); n.kids++; frontier.push(c); order.push(c);
+}
+nodes.forEach((n,k)=>{ if(!n.vis){n.vis=true; n.hue=R[n.r].hue; order.push(k);} });   // isolated islands
+for(let q=order.length-1;q>=0;q--){const n=nodes[order[q]]; if(n.par>=0) nodes[n.par].size+=n.size;}
+// for the sealed-off ending: each branch tip can loop back to an ancestor inside its own system
+nodes.forEach(n=>{let a=n.par,h=0; while(a>=0&&h<3){a=nodes[a].par;h++;} n.back=(a>=0&&R[nodes[a].r].sys===R[n.r].sys)?a:-1;});
+// ---- fur: short curling hyphae around every node, stored as points on the sphere
+const HN=7, hair=new Float32Array(nodes.length*HN*6);
+nodes.forEach((n,k)=>{const el=Math.hypot(n.Z,n.X)||1, ex=n.Z/el, ez=-n.X/el, nx=n.Y*ez, ny=n.Z*ex-n.X*ez, nz=-n.Y*ex;
+  for(let h=0;h<HN;h++){let th=rnd()*6.283, x=0, y=0; const len=(.007+.03*rnd()*rnd())*(1+.6*R[n.r].div);
+    for(let s=0;s<2;s++){x+=Math.cos(th)*len; y+=Math.sin(th)*len; th+=(rnd()-.5)*2.4;
+      const o=(k*HN+h)*6+s*3; hair[o]=n.X+ex*x+nx*y; hair[o+1]=n.Y+ny*y; hair[o+2]=n.Z+ez*x+nz*y;}}});
+// ---- long strands between seeds: a peer mesh, and a hub-and-spoke alternative
+function slerp(a,b,steps){const dot=Math.max(-1,Math.min(1,a.X*b.X+a.Y*b.Y+a.Z*b.Z)), om=Math.acos(dot), so=Math.sin(om)||1, pts=[];
+  for(let s=0;s<=steps;s++){const t=s/steps, k1=Math.sin((1-t)*om)/so, k2=Math.sin(t*om)/so, lift=1+.10*Math.sin(Math.PI*t)*Math.min(1,om/1.2);
+    pts.push([ (a.X*k1+b.X*k2)*lift,(a.Y*k1+b.Y*k2)*lift,(a.Z*k1+b.Z*k2)*lift ]);} return pts;}
+const ang=(a,b)=>Math.acos(Math.max(-1,Math.min(1,a.X*b.X+a.Y*b.Y+a.Z*b.Z)));
+const mesh=[], hubArcs=[];
+seeds.forEach(k=>{const a=nodes[k]; const others=seeds.filter(o=>o!==k&&nodes[o].r!==a.r).sort((p,q)=>ang(a,nodes[p])-ang(a,nodes[q]));
+  [others[0],others[2+Math.floor(rnd()*4)]].forEach(o=>{ if(o!==undefined&&k<o||rnd()<.25&&o!==undefined) mesh.push({a:k,b:o,pts:slerp(a,nodes[o],18)}); });});
+const hubs=['na','we','ea'].map(r=>seeds.filter(k=>nodes[k].r===r).sort((p,q)=>nodes[q].size-nodes[p].size)[0]).filter(k=>k!==undefined);
+seeds.forEach(k=>{ if(hubs.includes(k)) return; const a=nodes[k], h=hubs.slice().sort((p,q)=>ang(a,nodes[p])-ang(a,nodes[q]))[0]; hubArcs.push({a:k,b:h,pts:slerp(a,nodes[h],18)}); });
+for(let x=0;x<hubs.length;x++)for(let y=x+1;y<hubs.length;y++) hubArcs.push({a:hubs[x],b:hubs[y],pts:slerp(nodes[hubs[x]],nodes[hubs[y]],22),trunk:true});
+
+// ---- the model
+const Y0=2026,Y1=2100,N=Y1-Y0+1;
+const st={a:1,n:1,e:1,k:1,c:1,r:0};
+let track;
+function compute(){
+  const amax=.30+.55*st.a, nar0=.16+.34*st.n, ero0=.02+.08*st.e, conc=.35+.65*st.c;
+  track={A:[],reg:{}};
+  for(const k in R){let F=.02*R[k].on, C=1; const dv=R[k].div, mid=2040-25*(R[k].au-.30)+6*dv, tr0=R[k].tr, nar=Math.min(.9,nar0*(1+.5*dv)), ero=ero0*(1+.5*dv); const g=track.reg[k]={F:[],act:[]};
+    for(let t=0;t<N;t++){const A=amax/(1+Math.exp(-(Y0+t-mid)/6)), E=R[k].on+(Math.max(.97,R[k].on)-R[k].on)*(1-Math.exp(-t/25));
+      track.A[t]=A; g.F[t]=F; const tr=tr0+(.85-tr0)*(1-Math.exp(-t/45)); g.act[t]=Math.min(1,(.2+.62*tr)*(1+.45*A));
+      const nt=F*(.8-.7*st.k); C+=(1-C)*.06*nt-C*ero*A*E*(1-nt); const rel=(A+(1-A)*(1-C))*(1-.6*nt), T=rel*E*(nar+(1-nar)*(1-C)); F+=(T-F)*(.10+.15*conc);}}
+}
+const lerp=(a,i)=>{const k=Math.floor(i),f=i-k; return a[k]+(a[Math.min(N-1,k+1)]-a[k])*f;};
+function mixHue(h,target,f){const d=((target-h+540)%360)-180; return (h+d*f+360)%360;}
+// A node is a refugium when "kept" is on and its draw falls under the regional share (more where diversity is high and time online is low).
+const isRef=n=>n.ref<.30*st.r;
+
+// ---- drawing
+const cv=document.getElementById('g'), c=cv.getContext('2d');
+let S=600; function size(){const w=cv.clientWidth||600,d=Math.min(2,window.devicePixelRatio||1); S=cv.width=cv.height=Math.round(w*d);}
+const reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+let year=Y0, playing=!reduce, last=0, hold=0, lon0=-20*D2R, lat0=18*D2R, dragging=false;
+const px=new Float32Array(nodes.length), py=new Float32Array(nodes.length), pz=new Float32Array(nodes.length), nf=new Float32Array(nodes.length);
+function proj(X,Y,Z){const sl=Math.sin(lon0),cl=Math.cos(lon0),sp=Math.sin(lat0),cp=Math.cos(lat0);
+  const x=X*cl-Z*sl, z1=X*sl+Z*cl, y=Y*cp-z1*sp, z=Y*sp+z1*cp; return [x,y,z];}
+function draw(ms){
+  const t=year-Y0, tt=ms/1000, Rr=S*.44, cx=S/2, cy=S/2, conc=.35+.65*st.c;
+  const ins=st.k*(1-st.c), tgt=r=>mixHue(SYS_H[R[r].sys],FLAT_H,st.c);   // many systems + inflated confidence: each system seals itself off
+  c.clearRect(0,0,S,S);
+  const sea=c.createRadialGradient(cx-Rr*.3,cy-Rr*.35,Rr*.1,cx,cy,Rr); sea.addColorStop(0,'#1b2217'); sea.addColorStop(1,'#0a0d09');
+  c.fillStyle=sea; c.beginPath(); c.arc(cx,cy,Rr,0,6.283); c.fill();
+  c.strokeStyle='#2a3122'; c.lineWidth=S/600; c.stroke();
+  for(let k=0;k<nodes.length;k++){const n=nodes[k], p=proj(n.X,n.Y,n.Z); px[k]=cx+p[0]*Rr; py[k]=cy-p[1]*Rr; pz[k]=p[2];
+    let F=lerp(track.reg[n.r].F,t)*(.75+.5*n.lag); F=F>1?1:F; if(isRef(n)) F=Math.min(F,.06); nf[k]=F;}
+  c.lineCap='round';
+  // fur is surface variety (words): it persists, even thickens, while its colour converges (Moon et al.)
+  c.lineWidth=(S/600)*.5;
+  for(let k=0;k<nodes.length;k++){ if(pz[k]<.08) continue; const n=nodes[k], F=nf[k], fa=Math.min(.75,(.16+.34*pz[k])*(1+.3*F));
+    const act=lerp(track.reg[n.r].act,t), hue=mixHue(n.hue,tgt(n.r),F);
+    c.strokeStyle='hsl('+hue.toFixed(0)+' '+(50*(1-F)+14).toFixed(0)+'% '+(34+26*act).toFixed(0)+'% / '+fa.toFixed(2)+')';
+    c.beginPath();
+    for(let h=0;h<HN;h++){const o=(k*HN+h)*6, a1=proj(hair[o],hair[o+1],hair[o+2]), a2=proj(hair[o+3],hair[o+4],hair[o+5]);
+      c.moveTo(px[k],py[k]); c.quadraticCurveTo(cx+a1[0]*Rr,cy-a1[1]*Rr,cx+a2[0]*Rr,cy-a2[1]*Rr);}
+    c.stroke();}
+  // filaments, drawn as curves through each joint so the threads bend instead of cornering
+  for(let k=0;k<nodes.length;k++){const n=nodes[k]; if(n.par<0) continue; const z=Math.min(pz[k],pz[n.par]); if(z<.02) continue;
+    const F=nf[k], act=lerp(track.reg[n.r].act,t), fine=n.size<=3, trunk=n.size>14;
+    const target=tgt(n.r), hue=mixHue(n.hue,target,F), sat=(58*(1-F))+(32-20*st.c+22*ins)*F;
+    const pulse=reduce?1:.8+.2*Math.sin(tt*n.sp*(.5+2*act)+n.ph);
+    let alpha=(.35+.65*z)*(fine?1-.9*F*conc:1); if(ins>.02&&R[n.r].sys!==R[nodes[n.par].r].sys) alpha*=1-ins*Math.min(1,1.3*F); if(alpha<.03) continue;
+    const lum=(22+40*act)*pulse*(.55+.45*z)+8*F+12*F*st.k;
+    c.strokeStyle='hsl('+hue.toFixed(0)+' '+sat.toFixed(0)+'% '+lum.toFixed(0)+'% / '+alpha.toFixed(2)+')';
+    c.lineWidth=(S/600)*(.55+.42*Math.log2(1+n.size))*(trunk?1+.9*F*conc:1);
+    const p=n.par, g=nodes[p].par, mx=(px[p]+px[k])/2, my=(py[p]+py[k])/2;
+    c.beginPath();
+    if(g>=0){c.moveTo((px[g]+px[p])/2,(py[g]+py[p])/2); c.quadraticCurveTo(px[p],py[p],mx,my);} else {c.moveTo(px[p],py[p]); c.lineTo(mx,my);}
+    if(!n.kids) c.lineTo(px[k],py[k]);
+    c.stroke();
+    if(ins>.05&&!n.kids&&n.back>=0&&F>.08&&pz[n.back]>.02){const q=n.back, ox=-(py[q]-py[k])*.45, oy=(px[q]-px[k])*.45;
+      c.globalAlpha=Math.min(1,F*1.2)*ins; c.beginPath(); c.moveTo(px[k],py[k]); c.quadraticCurveTo((px[k]+px[q])/2+ox,(py[k]+py[q])/2+oy,px[q],py[q]); c.stroke(); c.globalAlpha=1;}}
+  // refugia and seeds glow
+  for(let k=0;k<nodes.length;k++){const n=nodes[k]; if(pz[k]<.05) continue; const ref=isRef(n); if(!ref&&!n.seed) continue;
+    const act=lerp(track.reg[n.r].act,t), F=nf[k], target=tgt(n.r);
+    c.fillStyle='hsl('+mixHue(n.hue,target,F).toFixed(0)+' '+(ref?80:70*(1-F)+20*F).toFixed(0)+'% '+(ref?66:50+20*act).toFixed(0)+'% / '+(.5+.5*pz[k]).toFixed(2)+')';
+    c.beginPath(); c.arc(px[k],py[k],(S/600)*(ref?1.7:2.4+1.5*F*conc*(hubs.includes(k)?2:0)),0,6.283); c.fill();}
+  // long strands: the peer mesh gives way to hubs as flattening and concentration rise
+  let Fbar=0,cnt=0; for(const r in track.reg){Fbar+=lerp(track.reg[r].F,t);cnt++;} Fbar/=cnt; const hubW=Math.min(1,Fbar*conc*1.25);
+  function strand(list,w,isHub){ if(w<.03) return; for(const s of list){const a=nodes[s.a]; const F=nf[s.a];
+      const target=tgt(a.r), hue=isHub?mixHue(a.hue,target,Math.max(F,.6)):mixHue(a.hue,target,F);
+      c.beginPath(); let pen=false, vis=0;
+      for(const p of s.pts){const q=proj(p[0],p[1],p[2]); if(q[2]<0&&Math.hypot(q[0],q[1])<1){pen=false; continue;}
+        const x=cx+q[0]*Rr,y=cy-q[1]*Rr; if(pen) c.lineTo(x,y); else c.moveTo(x,y); pen=true; vis++;}
+      if(vis<2) continue;
+      c.strokeStyle='hsl('+hue.toFixed(0)+' '+(isHub?(48-24*st.c):58*(1-F)+24*F).toFixed(0)+'% '+(isHub?68:58)+'% / '+(w*(isHub?.55:.38)).toFixed(2)+')';
+      c.lineWidth=(S/600)*(isHub?(s.trunk?2.6:1.3)*(.6+hubW):.8); c.stroke();}}
+  const cut=1-ins*Math.min(1,1.6*Fbar); strand(mesh,(1-hubW*.9)*cut,false); strand(hubArcs,hubW*cut,true);
+  yrEl.textContent=Math.round(year); if(document.activeElement!==slider) slider.value=Math.round(year);
+}
+const yrEl=document.getElementById('yr'), slider=document.getElementById('year'), btn=document.getElementById('play');
+function frame(ms){const dt=Math.min(.1,(ms-last)/1000); last=ms;
+  if(playing){ if(hold>0){hold-=dt; if(hold<=0) year=Y0;} else {year+=dt*1.7; if(year>=Y1){year=Y1; hold=5;}} }
+  if(!dragging&&!reduce) lon0-=dt*5*D2R;
+  draw(ms); requestAnimationFrame(frame);}
+// ---- controls
+const KEYS=[['sA','a'],['sN','n'],['sE','e'],['sK','k'],['sC','c'],['sR','r']], PK=['a','n','e','k','c'];
+function sync(){
+  KEYS.forEach(([id,key])=>{document.getElementById(id).value=Math.round(st[key]*100);});
+  document.querySelectorAll('#presets button').forEach(b=>b.setAttribute('aria-pressed',String(PK.every(q=>b.dataset[q]===undefined||Math.abs(+b.dataset[q]-st[q])<.02))));
+  compute();
+}
+KEYS.forEach(([id,key])=>document.getElementById(id).addEventListener('input',e=>{st[key]=e.target.value/100; sync();}));
+document.getElementById('presets').addEventListener('click',e=>{const b=e.target.closest('button'); if(!b) return; PK.forEach(q=>{ if(b.dataset[q]!==undefined) st[q]=+b.dataset[q]; }); sync();});
+btn.textContent=playing?'Pause':'Play';
+btn.addEventListener('click',()=>{playing=!playing; if(playing&&year>=Y1){year=Y0;hold=0;} btn.textContent=playing?'Pause':'Play';});
+slider.addEventListener('input',()=>{year=+slider.value; hold=0; playing=false; btn.textContent='Play';});
+let lx=0,ly=0;
+cv.addEventListener('pointerdown',e=>{dragging=true; lx=e.clientX; ly=e.clientY; cv.setPointerCapture(e.pointerId);});
+cv.addEventListener('pointermove',e=>{ if(!dragging) return; lon0-=(e.clientX-lx)*.006; lat0=Math.max(-1.1,Math.min(1.1,lat0+(e.clientY-ly)*.005)); lx=e.clientX; ly=e.clientY;});
+['pointerup','pointercancel'].forEach(ev=>cv.addEventListener(ev,()=>{dragging=false;}));
+// When the site hosts the weekly data file, put its address here and the starting values refresh on each visit.
+const DATA_URL='';
+if(DATA_URL) fetch(DATA_URL).then(r=>r.json()).then(d=>{for(const k in d.regions) if(R[k]){const g=d.regions[k]; if(g.internet_share) R[k].on=g.internet_share; if(g.automated_share!=null) R[k].au=g.automated_share;
+    if(g.traffic_share&&g.people_online_millions) R[k].tp=g.traffic_share/g.people_online_millions*1e4;} norm(); compute();}).catch(()=>{});
+window.addEventListener('resize',size); size(); sync(); requestAnimationFrame(frame);
+})();
+</script>
+
+</body>
+</html>

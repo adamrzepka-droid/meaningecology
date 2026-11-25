@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Archival Intelligence Project</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Archival Intelligence landing page.
+   Same family as the Institute page: black ground, serif title, mono labels, the palette strip.
+   The project's colour is fern green (its dot on the Institute page). */
+:root{
+  --ground:#020202; --panel:#0c0d0b; --ink:#ece7d8; --muted:#a09b8a; --dim:#6d695d; --line:#2b2a25;
+  --rust:#b5552f; --amber:#d39a3a; --lichen:#c9c46a; --moss:#7f9a45; --fern:#3f8f5a; --teal:#3f9c94; --pink:#b8598f; --violet:#8a5fb0; --bone:#d8cfa6;
+  --display:"Newsreader",Georgia,serif; --body:"IBM Plex Sans",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+html,body{margin:0;background:var(--ground);color:var(--ink)}
+body{font-family:var(--body);font-size:16px;line-height:1.6}
+a{color:inherit}
+.pad{padding-inline:clamp(18px,4vw,56px)}
+.label{font:500 .72rem var(--mono);letter-spacing:.14em;text-transform:uppercase}
+header{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px 28px;padding-block:22px}
+header .home{color:var(--muted);text-decoration:none}
+header .home:hover{color:var(--ink)}
+nav{display:flex;flex-wrap:wrap;gap:8px clamp(14px,2.4vw,30px)}
+nav a{text-decoration:none;padding:4px 0;border-bottom:1px solid transparent}
+nav a:hover,nav a:focus-visible{border-bottom-color:var(--fern);outline:none}
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,5vw,72px);align-items:center;padding-block:clamp(16px,4vw,48px) clamp(36px,6vw,80px)}
+.hero h1{font-family:var(--display);font-weight:300;font-size:clamp(2.2rem,5.2vw,4.2rem);line-height:1.02;margin:14px 0 22px;text-wrap:balance}
+.kicker{display:inline-flex;align-items:center;gap:10px;color:var(--muted)}
+.kicker::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--fern)}
+.hero .say{font-family:var(--display);font-size:clamp(1.15rem,2vw,1.5rem);line-height:1.35;color:var(--ink);max-width:28ch;margin:0}
+.hero .status{margin:26px 0 0;color:var(--muted)}
+figure{margin:0}
+.plate{position:relative;aspect-ratio:3/4;max-height:82vh;margin-inline:auto;overflow:hidden;background:#000}
+.plate img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 2.4s ease}
+.plate img.on{opacity:1}
+figcaption{margin-top:10px;color:var(--dim);font-size:.8rem;max-width:60ch}
+section{border-top:1px solid var(--line);padding-block:clamp(32px,5vw,64px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:18px clamp(24px,5vw,72px)}
+section h2{font:500 .78rem var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:6px 0 0}
+section .body{max-width:64ch}
+section .body > p:first-child{font-family:var(--display);font-size:clamp(1.2rem,2vw,1.5rem);line-height:1.35;margin-top:0}
+.pair{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px 32px;margin-top:8px}
+.pair h3{font-family:var(--display);font-weight:500;font-size:1.2rem;margin:0 0 4px}
+.pair p{margin:0;color:var(--muted)}
+.figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:22px 28px;margin:6px 0 18px}
+.figs b{display:block;font-family:var(--display);font-weight:300;font-size:2.4rem;line-height:1;font-variant-numeric:tabular-nums}
+.figs span{color:var(--muted);font-size:.9rem}
+.note{color:var(--muted)}
+.draft{font:500 .68rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--amber);border:1px solid var(--line);padding:2px 7px;border-radius:2px;vertical-align:middle}
+.strip{display:flex;height:10px}.strip i{flex:1}
+footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-block:14px 18px;color:var(--dim)}
+@media (max-width:780px){.hero,section{grid-template-columns:1fr}.plate{max-height:70vh}}
+@media (prefers-reduced-motion:reduce){.plate img{transition:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header class="pad label">
+  <a class="home" href="index.html">← Institute for the Ecology of Meaning</a>
+  <nav aria-label="Sections">
+    <a href="#mission">Mission</a>
+    <a href="#instrument">The instrument</a>
+    <a href="#cases">Test cases</a>
+    <a href="#results">Results</a>
+    <a href="#archive">The archive</a>
+    <a href="#partners">Partners</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main>
+<div class="hero pad">
+  <div>
+    <span class="kicker label">A project of the Institute</span>
+    <h1>Archival Intelligence Project</h1>
+    <p class="say">A collator for handwriting: an instrument that compares hands across archives and shows a scholar where to look.</p>
+    <p class="status label">Under calibration · 2026–27</p>
+  </div>
+  <figure>
+    <div class="plate" id="plate" role="img" aria-label="Title page of a 1610 printed book, its margins filled with a reader's handwritten notes"></div>
+    <figcaption>The Castle of Health (London, 1610), title page with a reader’s annotations. Photograph: Adam Rzepka.</figcaption>
+  </figure>
+</div>
+
+<section class="pad" id="mission">
+  <h2>Mission</h2>
+  <div class="body">
+    <p>The Archival Intelligence Project is building an instrument to recover lost networks of social and intellectual exchange from the manuscript record of the early modern period.</p>
+    <p>The idea took shape on a research trip to the British and Bodleian Libraries in 2024, among the traces that early modern readers left as they used books to work through real problems: extensive shorthand commentaries, detailed lists, superb sketches. The means of working out who made such marks, let alone what else the same person wrote in other volumes, remain strikingly underdeveloped. It is still a matter of paging through incomplete indexes and partial accounts of personal libraries.</p>
+    <p>Two decades of digitisation have made a vast body of early print searchable, yet a scholar who knows the material inside and out is still more likely to find the striking connection than any query. Manuscripts and marginalia are crucial for establishing ownership, authorship and intellectual history, and they cannot be transcribed by hand at scale. New capacities in visual pattern recognition change what is possible, provided the work is grounded in visual analysis as such and not only in visual analysis for the purpose of transcription.</p>
+    <p>The project’s most far-reaching aim is a maximally dense reconstruction of largely lost social networks in intellectual history. What that promises is more than information about who wrote to whom, or where a missing text might be found. It is a topologically coherent understanding of how new meaning emerges from networks of exchange, so that the social incubators behind every historical advance in human thought can be understood, and new means found of maintaining such incubators in the present.</p>
+  </div>
+</section>
+
+<section class="pad" id="instrument">
+  <h2>The instrument</h2>
+  <div class="body">
+    <p>The first instrument is a collator for handwriting, in the tradition of the Hinman Collator: it compares hands across collections at a scale no reader can.</p>
+    <p>It works in two passes. The first searches a large archive of page images and returns a shortlist of pages whose writing resembles the page in question. The second compares the shortlisted pages closely and gives each a probability that the same person wrote both.</p>
+    <p>It interprets nothing and proves nothing. Its output is a lead at a stated probability, with the reasons recorded, for a scholar to follow up.</p>
+  </div>
+</section>
+
+<section class="pad" id="cases">
+  <h2>Two test cases</h2>
+  <div class="body">
+    <div class="pair">
+      <div><h3>Marginalia</h3><p>Give the instrument one annotated page and ask whether the annotator’s hand appears anywhere else. This is where the project began, in 2024.</p></div>
+      <div><h3>The missing manuscript</h3><p>Give it pages in a known hand and ask it to find writing by that person which is not known to be theirs.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="pad" id="results">
+  <h2>Results so far</h2>
+  <div class="body">
+    <p>First trials, November 2026. These are early figures from small tests, reported with their limits.</p>
+    <div class="figs">
+      <div><b>45 of 45</b><span>held-out pages by two known writers matched to their own hand</span></div>
+      <div><b>3 of 743</b><span>pages by other writers wrongly matched</span></div>
+      <div><b>36 of 45</b><span>same-writer pairs matched across different documents, with no false matches in 500</span></div>
+    </div>
+    <p class="note">The first two figures come from a general-purpose model that recognised both writers by name, so they overstate what it can do with an unknown hand. The third, on less familiar writers and across documents, is the fairer guide. Cross-library tests have not yet been run.</p>
+  </div>
+</section>
+
+<section class="pad" id="archive">
+  <h2>The archive</h2>
+  <div class="body">
+    <p>Behind the instrument is a graded archive of manuscript images, built to outlast any particular model.</p>
+    <div class="figs">
+      <div><b>2,456</b><span>page images</span></div>
+      <div><b>376</b><span>items</span></div>
+      <div><b>274</b><span>writers</span></div>
+      <div><b>9</b><span>source collections</span></div>
+    </div>
+    <p class="note">Every attribution carries a grade, from autograph and documented to conjectural, and every judgement the instrument makes is stored as a claim with its probability and source. Original images are never altered.</p>
+  </div>
+</section>
+
+<section class="pad" id="partners">
+  <h2>Partners</h2>
+  <div class="body">
+    <p>The project depends on the libraries that hold the manuscripts and on the scholars who know the hands.</p>
+    <p class="note">Libraries and collaborators will be named here as agreements are confirmed.</p>
+  </div>
+</section>
+
+<section class="pad" id="contact">
+  <h2>Contact</h2>
+  <div class="body">
+    <p>Adam Rzepka</p>
+    <p class="note">Associate Professor of English, Montclair State University</p>
+    <p class="note"><a href="mailto:rzepkaa@montclair.edu">rzepkaa@montclair.edu</a>. Librarians, archivists and palaeographers with a hand they would like tested are especially welcome to write.</p>
+  </div>
+</section>
+</main>
+
+<div class="strip" aria-hidden="true">
+  <i style="background:var(--rust)"></i><i style="background:var(--amber)"></i><i style="background:var(--lichen)"></i><i style="background:var(--moss)"></i><i style="background:var(--fern)"></i><i style="background:var(--teal)"></i><i style="background:var(--violet)"></i><i style="background:var(--pink)"></i><i style="background:var(--bone)"></i>
+</div>
+<footer class="pad label"><span>Archival Intelligence Project</span><span>Site in preparation</span></footer>
+
+<script>
+// Images to rotate in the hero plate, relative to this file.
+const HERO=['castle-of-health-1','castle-of-health-2','castle-of-health-3'].map(n=>'media/files/'+n+'.jpg');
+const SECONDS=10, box=document.getElementById('plate'), imgs=[];
+HERO.forEach(src=>{const im=new Image(); im.alt=''; im.onload=()=>{imgs.push(im); box.appendChild(im); if(imgs.length===1) im.classList.add('on');}; im.src=src;});
+let cur=0;
+if(!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches))
+  setInterval(()=>{ if(imgs.length<2) return; imgs[cur].classList.remove('on'); cur=(cur+1)%imgs.length; imgs[cur].classList.add('on'); },SECONDS*1000);
+</script>
+</body>
+</html>

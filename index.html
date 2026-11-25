@@ -1,0 +1,34 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex, nofollow"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Institute for the Ecology of Meaning</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap"><style>/* Institute landing page. To change the rotation, edit the HERO list at the bottom. */
+:root{
+  --ground:#020202; --ink:#ece7d8; --muted:#9a9584; --line:#2b2a25;
+  /* swatches: the globe model's palette */
+  --rust:#b5552f; --amber:#d39a3a; --lichen:#c9c46a; --moss:#7f9a45; --fern:#3f8f5a; --teal:#3f9c94; --pink:#b8598f; --violet:#8a5fb0; --bone:#d8cfa6;
+  --display:"Newsreader",Georgia,serif; --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--ground);color:var(--ink)}
+body{font-family:var(--mono);display:flex;flex-direction:column;min-height:100svh}
+header{position:relative;z-index:1;padding:28px clamp(18px,4vw,56px) 0;display:flex;flex-direction:column;align-items:flex-start;gap:10px}
+h1{font-family:var(--display);font-weight:300;font-size:clamp(1.7rem,3.6vw,2.8rem);line-height:1.06;margin:0;letter-spacing:.005em;text-wrap:balance;max-width:15ch}
+.sub{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.hero{flex:1;min-height:0;position:relative;display:grid;place-items:center;padding:12px}
+.hero img{position:absolute;inset:0;margin:auto;width:min(74vmin,720px);height:min(74vmin,720px);object-fit:contain;opacity:0;transition:opacity 2.4s ease}
+.hero img.on{opacity:1}
+.hero .empty{color:var(--muted);font-size:.8rem;border:1px dashed var(--line);padding:18px 22px;max-width:44ch;text-align:center;line-height:1.5}
+nav{padding:0 clamp(18px,4vw,56px) 22px;display:flex;flex-wrap:wrap;gap:14px clamp(18px,3.4vw,44px);justify-content:center}
+nav a{color:var(--ink);text-decoration:none;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;display:inline-flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid transparent}
+nav a::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--c)}
+nav a:hover,nav a:focus-visible{border-bottom-color:var(--c);outline:none}
+.strip{display:flex;height:10px}
+.strip i{flex:1}
+footer{padding:12px clamp(18px,4vw,56px) 16px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){.hero img{transition:none}}</style></head><body><header><h1>Institute for the Ecology of Meaning</h1></header><div class="hero" id="hero" role="img" aria-label="Rotating image of a mycelial network"></div><nav aria-label="Pages"><a href="mission.html" style="--c:var(--amber)">Mission</a> <a href="archival-intelligence.html" style="--c:var(--fern)">Archival Intelligence</a> <a href="daedala.html" style="--c:var(--pink)">Daedala</a> <a href="contact.html" style="--c:var(--bone)">Contact</a></nav><div class="strip" aria-hidden="true"><i style="background:var(--rust)"></i><i style="background:var(--amber)"></i><i style="background:var(--lichen)"></i><i style="background:var(--moss)"></i><i style="background:var(--fern)"></i><i style="background:var(--teal)"></i><i style="background:var(--violet)"></i><i style="background:var(--pink)"></i><i style="background:var(--bone)"></i></div><footer><span>Institute for the Ecology of Meaning</span><span>Images: SYS™, “mycelium network:abstraction” · Site in preparation</span></footer><script>// Images to rotate, relative to this file. Replace with cleared images before publishing.
+const HERO=[1,2,3,4,5,6,7].map(n=>'media/files/mna-'+n+'.webp');
+const SECONDS=8;
+const box=document.getElementById('hero'), imgs=[];
+let loaded=0;
+HERO.forEach(src=>{const im=new Image(); im.alt=''; im.onload=()=>{imgs.push(im); box.appendChild(im); if(++loaded===1) im.classList.add('on');}; im.src=src;});
+setTimeout(()=>{ if(!imgs.length) box.innerHTML='<div class="empty"></div>'; },2500);
+let cur=0;
+if(!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches))
+  setInterval(()=>{ if(imgs.length<2) return; imgs[cur].classList.remove('on'); cur=(cur+1)%imgs.length; imgs[cur].classList.add('on'); },SECONDS*1000);</script></body></html>
