@@ -2,8 +2,8 @@
     "version": "https://jsonfeed.org/version/1",
     "title": "Institute for the Ecology of Meaning",
     "description": "",
-    "home_page_url": "https://adamrzepka-droid.github.io/meaningecology",
-    "feed_url": "https://adamrzepka-droid.github.io/meaningecology/feed.json",
+    "home_page_url": "https://meaningecology.org",
+    "feed_url": "https://meaningecology.org/feed.json",
     "user_comment": "",
     "author": {
         "name": "Adam Rzepka"
