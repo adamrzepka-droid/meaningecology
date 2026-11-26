@@ -61,13 +61,13 @@ details a{color:var(--ink)}
   <span class="tag">Prototype · mostly placeholder values</span>
   <h1>Daedala</h1>
   <p class="sub2">A research vessel for the ecology of meaning</p>
-  <p class="lede">Daedala is a speculative instrument. It gathers what research can currently say about how generative AI affects the variety of human expression, and draws the futures that follow. As new studies arrive, its settings change. It shows possible scenarios, not a forecast. The name is Lucretius’s word for the inventive variety of nature.</p>
-  <p class="sub2" style="color:var(--ink)">The living network of meaning, 2026 to 2100</p>
-  <p class="lede">Filaments are the channels through which people make and pass meaning. Their colours are variety; their fine branching is local difference. Turn the globe, change the assumptions, and watch what the network becomes.</p>
+  <p class="lede">Daedala is a speculative instrument. It gathers what the research currently shows about how Generative AI affects the variety and richness of human expression, and maps possible futures accordingly. As new studies arrive, its settings change. The name is Lucretius’s word for the inventive variety of nature.</p>
+  <p class="sub2" style="color:var(--ink)">The living network of human meaning, 2026 to 2100</p>
+  <p class="lede">Filaments are the channels through which people make and share meaning. Their colors reflect variety; their fine branching shows local difference. Adjust the sliders across the range of effects that current research posits, and see possible effects on the global ecology of human meaning for the rest of the century.</p>
 
   <div class="stage">
     <div class="globe">
-      <canvas id="g" role="img" aria-label="Rotating globe covered by a branching network whose colours and fine branches change over time"></canvas>
+      <canvas id="g" role="img" aria-label="Rotating globe covered by a branching network whose colors and fine branches change over time"></canvas>
       <div class="clock">
         <span class="year" id="yr">2026</span>
         <button id="play" type="button">Pause</button>
@@ -87,15 +87,15 @@ details a{color:var(--ink)}
       <div class="group"><h2>Automated share of production</h2>
         <input type="range" id="sA" min="0" max="100" step="1" value="100" aria-label="Automated share of production, from small to large">
         <div class="poles"><span>Small · 30%</span><span>Large · 85%</span></div>
-        <details><summary>Basis</summary><p>No study fixes where this ends up; both ends are assumptions. Each region’s starting point is real: the automated share of its web traffic, from Cloudflare Radar. Adoption by country follows <a href="https://doi.org/10.1016/j.worlddev.2025.107260" target="_blank" rel="noopener">Liu &amp; Wang 2026</a>.</p></details></div>
+        <details><summary>Basis</summary><p>No study fixes where this ends up; both ends are assumptions. Each region’s starting point is real: the automated share of its web traffic, from Cloudflare Radar. Adoption by country follows <a href="https://doi.org/10.1016/j.worlddev.2025.107260" target="_blank" rel="noopener">Liu &amp; Wang 2026</a>. One estimate put AI-generated pages at about 14 percent of Google results by September 2024 (cited in <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5045155" target="_blank" rel="noopener">Burden et al. 2024</a>).</p></details></div>
       <div class="group"><h2>Narrowing per pass</h2>
         <input type="range" id="sN" min="0" max="100" step="1" value="100" aria-label="Narrowing per pass, from a sixth to a half">
         <div class="poles"><span>By a sixth</span><span>By half</span></div>
-        <details><summary>Basis</summary><p><a href="https://arxiv.org/abs/2502.11266" target="_blank" rel="noopener">Sourati et al. 2025</a>: when AI rewrote people’s texts, variety of style fell by 16 to 51 per cent. Moon et al. (preprint): in 372,793 admissions essays, variety of words rose while variety of ideas fell.</p></details></div>
+        <details><summary>Basis</summary><p><a href="https://arxiv.org/abs/2502.11266" target="_blank" rel="noopener">Sourati et al. 2025</a>: when AI rewrote people’s texts, variety of style fell by 16 to 51 percent. Moon et al. (preprint): in 372,793 admissions essays, variety of words rose while variety of ideas fell.</p></details></div>
       <div class="group"><h2>Erosion of independent capacity</h2>
         <input type="range" id="sE" min="0" max="100" step="1" value="100" aria-label="Erosion of independent capacity, from slow to fast">
         <div class="poles"><span>Slow · 2% a year</span><span>Fast · 10% a year</span></div>
-        <details><summary>Basis</summary><p><a href="https://arxiv.org/abs/2605.21629" target="_blank" rel="noopener">Rismanchian et al. 2026</a>: students’ time on AI-solvable problems fell 2.8 per cent a quarter, and retention fell with it. Strömberg, Lei &amp; Wu 2026 (CEPR DP21577): exam scores down a fifth within six months. <a href="https://arxiv.org/abs/2604.04721" target="_blank" rel="noopener">Liu et al. 2026</a>: worse performance alone after ten minutes of help. The slow end is an assumption.</p></details></div>
+        <details><summary>Basis</summary><p><a href="https://arxiv.org/abs/2605.21629" target="_blank" rel="noopener">Rismanchian et al. 2026</a>: students’ time on AI-solvable problems fell 2.8 percent a quarter, and retention fell with it. Strömberg, Lei &amp; Wu 2026 (CEPR DP21577): exam scores down a fifth within six months. <a href="https://arxiv.org/abs/2604.04721" target="_blank" rel="noopener">Liu et al. 2026</a>: worse performance alone after ten minutes of help. The slow end is an assumption.</p></details></div>
       <div class="group"><h2>Confidence</h2>
         <input type="range" id="sK" min="0" max="100" step="1" value="100" aria-label="Confidence, from calibrated to inflated">
         <div class="poles"><span>Calibrated</span><span>Inflated</span></div>
@@ -103,19 +103,19 @@ details a{color:var(--ink)}
       <div class="group"><h2>Concentration</h2>
         <input type="range" id="sC" min="0" max="100" step="1" value="100" aria-label="Concentration, from many systems to a few">
         <div class="poles"><span>Many systems</span><span>A few</span></div>
-        <details><summary>Basis</summary><p>An assumption at both ends. With a few systems, everything routes through the same hubs and settles on one colour. With many systems and inflated confidence, each seals itself off: the strands between them die and the branches loop back on themselves.</p></details></div>
+        <details><summary>Basis</summary><p><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5045155" target="_blank" rel="noopener">Burden et al. 2024</a> argue that human-written text from before 2022 is becoming a scarce input for training, which entrenches the few systems that already hold it. Centola 2022 finds that decentralized networks reliably improve collective judgment, while centralized ones help or harm depending on who sits at the center. Where the slider sits is an assumption. With a few systems, everything routes through the same hubs and settles on one color. With many systems and inflated confidence, each seals itself off: the strands between them die and the branches loop back on themselves.</p></details></div>
       <div class="group"><h2>Refugia</h2>
         <input type="range" id="sR" min="0" max="100" step="1" value="0" aria-label="Refugia, from none to three in ten">
         <div class="poles"><span>None</span><span>Three in ten</span></div>
-        <details><summary>Basis</summary><p>The share working under protected conditions, which keeps its colour. In Strömberg et al. about a fifth of users kept working as before and lost little; in Shaw &amp; Nave people overrode a wrong AI one time in five; in Rismanchian et al. the effect vanished under proctoring.</p></details></div>
+        <details><summary>Basis</summary><p>The share working under protected conditions, which keeps its color. In Strömberg et al. about a fifth of users kept working as before and lost little; in Shaw &amp; Nave people overrode a wrong AI one time in five; in Rismanchian et al. the effect vanished under proctoring.</p></details></div>
     </div>
   </div>
 
   <div class="notes">
-    <div><h2>How to read it</h2><p><b>Colour</b> is variety: each filament line begins with its own hue, spread in proportion to a region's linguistic diversity. <b>Brightness</b> is activity: web traffic per person online, on a compressed scale. <b>Fine branches</b> are local difference in ideas; as meaning flattens they fade and the trunks thicken. <b>The fuzz</b> is variety of words, which survives: a flattened region stays lush but turns one colour.</p></div>
+    <div><h2>How to read it</h2><p><b>Color</b> is variety: each filament line begins with its own hue, spread in proportion to a region's linguistic diversity. <b>Brightness</b> is activity: web traffic per person online, on a compressed scale. <b>Fine branches</b> are local difference in ideas; as meaning flattens they fade and the trunks thicken. <b>The fuzz</b> is variety of words, which survives: a flattened region stays lush but turns one color.</p></div>
     <div><h2>What moves it</h2><p>Each year a region changes by its <b>automated share</b> times its <b>share of people online</b> times the assumed <b>narrowing</b>. As independent capacity erodes, reliance grows and the loss deepens. <b>Confidence</b> decides whether that loop can be broken: when calibrated, noticed loss slows the erosion and lets capacity recover; when inflated, the loss goes unseen, and the network glows brighter as it bleaches. The most linguistically diverse regions are reached later but fall faster. Regions with more automated traffic today meet the automation curve sooner. Concentration speeds the change and decides where the long strands run.</p></div>
     <div><h2>Status</h2><p>An illustration of an argument, not a measurement. The network is grown at random over a coarse map, and three starting values are real: share of people online (World Bank, from ITU figures), and traffic per person and automated share of traffic (Cloudflare Radar). Linguistic diversity is a stand-in chosen by eye. The settings are tethered to studies but interpreted freely: these are possible scenarios, not projections.</p></div>
-    <div><h2>Studies behind the settings</h2><p><b>Narrowing:</b> Sourati et al. 2025; Moon et al. (words diversify while ideas converge). <b>Erosion:</b> Rismanchian et al. 2026; Strömberg, Lei &amp; Wu 2026; Liu et al. 2026. <b>Confidence:</b> Shaw &amp; Nave 2026. <b>Refugia:</b> Rismanchian et al.; Strömberg et al.; Shaw &amp; Nave 2026 (people overrode a faulty AI about one time in five). Most are preprints, not yet peer reviewed.</p></div>
+    <div><h2>Studies behind the settings</h2><p><b>Narrowing:</b> Sourati et al. 2025; Moon et al. (words diversify while ideas converge). <b>Erosion:</b> Rismanchian et al. 2026; Strömberg, Lei &amp; Wu 2026; Liu et al. 2026. <b>Concentration:</b> Burden et al. 2024; Centola 2022. <b>Confidence:</b> Shaw &amp; Nave 2026. <b>Refugia:</b> Rismanchian et al.; Strömberg et al.; Shaw &amp; Nave 2026 (people overrode a faulty AI about one time in five). Most are preprints, not yet peer reviewed.</p></div>
   </div>
 </div>
 <script>
