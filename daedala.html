@@ -39,6 +39,8 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--flat);outline-o
 .group p{margin:0;color:var(--dim);font-size:.86rem}
 .seg{display:flex;flex-wrap:wrap;gap:6px}
 .seg button{flex:1 1 auto}
+#presets button{border-color:color-mix(in srgb,var(--flat) calc(var(--g,0)*100%),var(--line));background:color-mix(in srgb,var(--flat) calc(var(--g,0)*28%),var(--panel));box-shadow:0 0 calc(var(--g,0)*16px) color-mix(in srgb,var(--flat) calc(var(--g,0)*55%),transparent);transition:background .25s,box-shadow .25s,border-color .25s}
+#presets button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink)}
 .side input[type=range]{width:100%;margin:0;accent-color:var(--flat)}
 .poles{display:flex;justify-content:space-between;gap:10px;font:400 .72rem var(--mono);color:var(--muted)}
 details summary{font:500 .68rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--dim);cursor:pointer;width:max-content}
@@ -58,10 +60,10 @@ details a{color:var(--ink)}
   <span style="display:flex;flex-wrap:wrap;gap:8px 26px"><a href="mission.html" style="color:#e6e6d6;text-decoration:none">Mission</a><a href="archival-intelligence.html" style="color:#e6e6d6;text-decoration:none">Archival Intelligence</a><a href="daedala.html" style="color:#e6e6d6;text-decoration:none">Daedala</a><a href="contact.html" style="color:#e6e6d6;text-decoration:none">Contact</a></span>
 </div>
 <div class="wrap">
-  <span class="tag">Prototype · mostly placeholder values</span>
+  <span class="tag">Prototype · part real data, part assumption</span>
   <h1>Daedala</h1>
   <p class="sub2">A research vessel for the ecology of meaning</p>
-  <p class="lede">Daedala is a speculative instrument. It gathers what the research currently shows about how Generative AI affects the variety and richness of human expression, and maps possible futures accordingly. As new studies arrive, its settings change. The name is Lucretius’s word for the inventive variety of nature.</p>
+  <p class="lede">Daedala is a speculative instrument. It gathers what the research currently shows about how Generative AI affects the variety and richness of human expression — semiodiversity — and maps possible futures accordingly. As new studies arrive, its settings change. The name is Lucretius’s word for the inventive variety of nature.</p>
   <p class="sub2" style="color:var(--ink)">The living network of human meaning, 2026 to 2100</p>
   <p class="lede">Filaments are the channels through which people make and share meaning. Their colors reflect variety; their fine branching shows local difference. Adjust the sliders across the range of effects that current research posits, and see possible effects on the global ecology of human meaning for the rest of the century.</p>
 
@@ -78,12 +80,13 @@ details a{color:var(--ink)}
     <div class="side">
       <div class="group"><h2>Futures</h2>
         <div class="seg" id="presets">
-          <button type="button" data-a="0" data-n="0" data-e="0" data-k="0">Coexistence</button>
-          <button type="button" data-a="0" data-n="1" data-e="1" data-k="1">Slow erosion</button>
-          <button type="button" data-a="1" data-n="0" data-e="0" data-k="0">Abundance</button>
-          <button type="button" data-a="1" data-n="1" data-e="1" data-k="1" data-c="1">Monoculture</button>
-          <button type="button" data-a="1" data-n="1" data-e="1" data-k="1" data-c="0">Archipelago</button>
-        </div></div>
+          <button type="button" data-a="0" data-n="0" data-e="0" data-k="0" data-q="0" data-d="Automation remains a small share of what people produce, and minimally reduces its range. People notice what is being lost, and correct for it. Variety still thins slightly over the century, but every region maintains a distinguishable contribution to semiodiversity.">Coexistence</button>
+          <button type="button" data-a="0" data-n="1" data-e="1" data-k="1" data-q="1" data-d="Automation stays a small share, but its effects compound as human capacities erode and defer to it accordingly. Independent capacity fades quickly, but no one notices. Little seems to change before mid-century; by 2100, semiodiversity is decimated.">Erosive collapse</button>
+          <button type="button" data-a="1" data-n="0" data-e="0" data-k="0" data-q="0" data-d="Automation produces most of what circulates, but its homogenizing effects stay at the low end of possibility, and people stay alert to the loss. Some variety goes by mid-century; then the loss levels off, and most semiodiversity survives.">Relative plenitude</button>
+          <button type="button" data-a="1" data-n="1" data-e="1" data-k="1" data-q="1" data-c="1" data-d="Automation dominates, compounds sharply, erodes capacity, and inflates confidence, all through consolidated systems. By about 2060, most regions have converged in a monotone, with transmission routed through the same hubs.">Monoculture</button>
+          <button type="button" data-a="1" data-n="1" data-e="1" data-k="1" data-q="1" data-c="0" data-d="The same pressures apply as in Monoculture, but spread across many systems. Each seals itself off into its own distinct variations (a vivid color), but the connections between them die.">Archipelago</button>
+        </div>
+        <p id="pdesc" aria-live="polite" data-custom="Your own settings. Choose a future above to return to a named scenario." style="color:var(--muted);min-height:6.2em"></p></div>
       <div class="group"><h2>Automated share of production</h2>
         <input type="range" id="sA" min="0" max="100" step="1" value="100" aria-label="Automated share of production, from small to large">
         <div class="poles"><span>Small · 30%</span><span>Large · 85%</span></div>
@@ -96,6 +99,10 @@ details a{color:var(--ink)}
         <input type="range" id="sE" min="0" max="100" step="1" value="100" aria-label="Erosion of independent capacity, from slow to fast">
         <div class="poles"><span>Slow · 2% a year</span><span>Fast · 10% a year</span></div>
         <details><summary>Basis</summary><p><a href="https://arxiv.org/abs/2605.21629" target="_blank" rel="noopener">Rismanchian et al. 2026</a>: students’ time on AI-solvable problems fell 2.8 percent a quarter, and retention fell with it. Strömberg, Lei &amp; Wu 2026 (CEPR DP21577): exam scores down a fifth within six months. <a href="https://arxiv.org/abs/2604.04721" target="_blank" rel="noopener">Liu et al. 2026</a>: worse performance alone after ten minutes of help. The slow end is an assumption.</p></details></div>
+      <div class="group"><h2>Systems feeding on their own output</h2>
+        <input type="range" id="sQ" min="0" max="100" step="1" value="100" aria-label="Systems feeding on their own output, from contained to runaway">
+        <div class="poles"><span>Contained</span><span>Runaway</span></div>
+        <details><summary>Basis</summary><p><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5045155" target="_blank" rel="noopener">Burden et al. 2024</a> describe how systems trained on their own output degrade (“model collapse”), and how hard that output is to filter out once it is in circulation. Here the effect is slight until machine-made material approaches half of what circulates, then steepens, and it does not reverse: a tipping point, like carbon released from thawing permafrost. Where the threshold lies is an assumption.</p></details></div>
       <div class="group"><h2>Confidence</h2>
         <input type="range" id="sK" min="0" max="100" step="1" value="100" aria-label="Confidence, from calibrated to inflated">
         <div class="poles"><span>Calibrated</span><span>Inflated</span></div>
@@ -112,10 +119,10 @@ details a{color:var(--ink)}
   </div>
 
   <div class="notes">
-    <div><h2>How to read it</h2><p><b>Color</b> is variety: each filament line begins with its own hue, spread in proportion to a region's linguistic diversity. <b>Brightness</b> is activity: web traffic per person online, on a compressed scale. <b>Fine branches</b> are local difference in ideas; as meaning flattens they fade and the trunks thicken. <b>The fuzz</b> is variety of words, which survives: a flattened region stays lush but turns one color.</p></div>
-    <div><h2>What moves it</h2><p>Each year a region changes by its <b>automated share</b> times its <b>share of people online</b> times the assumed <b>narrowing</b>. As independent capacity erodes, reliance grows and the loss deepens. <b>Confidence</b> decides whether that loop can be broken: when calibrated, noticed loss slows the erosion and lets capacity recover; when inflated, the loss goes unseen, and the network glows brighter as it bleaches. The most linguistically diverse regions are reached later but fall faster. Regions with more automated traffic today meet the automation curve sooner. Concentration speeds the change and decides where the long strands run.</p></div>
-    <div><h2>Status</h2><p>An illustration of an argument, not a measurement. The network is grown at random over a coarse map, and three starting values are real: share of people online (World Bank, from ITU figures), and traffic per person and automated share of traffic (Cloudflare Radar). Linguistic diversity is a stand-in chosen by eye. The settings are tethered to studies but interpreted freely: these are possible scenarios, not projections.</p></div>
-    <div><h2>Studies behind the settings</h2><p><b>Narrowing:</b> Sourati et al. 2025; Moon et al. (words diversify while ideas converge). <b>Erosion:</b> Rismanchian et al. 2026; Strömberg, Lei &amp; Wu 2026; Liu et al. 2026. <b>Concentration:</b> Burden et al. 2024; Centola 2022. <b>Confidence:</b> Shaw &amp; Nave 2026. <b>Refugia:</b> Rismanchian et al.; Strömberg et al.; Shaw &amp; Nave 2026 (people overrode a faulty AI about one time in five). Most are preprints, not yet peer reviewed.</p></div>
+    <div><h2>How to read it</h2><p><b>Color</b> is variety: each filament line begins with its own hue, spread in proportion to a region's linguistic diversity. <b>Brightness</b> is activity: web traffic per person online, on a compressed scale. <b>Fine filaments</b> are local difference; as meaning flattens they thin out and what remains turns one color. Nothing is drawn at the meeting points: the bright places are where many threads cross. Heavier threads run between the busiest places. Waves of brightness travel along the threads, more of them and faster where web traffic per person is higher. The web fills in as more of each region comes online. About a quarter of the threads go nowhere in particular and feather off at the edges, and these are the first to go as variety is lost. A few threads in every region reach in from its neighbors.</p></div>
+    <div><h2>What moves it</h2><p>Each year a region changes by its <b>automated share</b> times its <b>share of people online</b> times the assumed <b>narrowing</b>. As independent capacity erodes, reliance grows and the loss deepens. Once machine-made material is close to half of what circulates, systems feeding on their own output can tip the loss into a steeper decline that does not reverse. <b>Confidence</b> decides whether that loop can be broken: when calibrated, noticed loss slows the erosion and lets capacity recover; when inflated, the loss goes unseen, and the network glows brighter as it bleaches. The most linguistically diverse regions are reached later but fall faster. Regions with more automated traffic today meet the automation curve sooner. Concentration speeds the change and decides where the long strands run.</p></div>
+    <div><h2>Status</h2><p>An illustration of an argument, not a measurement. The network is grown at random over a coarse map, and three starting values are real: share of people online (World Bank, from ITU figures), and traffic per person and automated share of traffic (Cloudflare Radar). Linguistic diversity by region is also real (Greenberg’s index by country, weighted by population). The settings are tethered to studies but interpreted freely: these are possible scenarios, not projections.</p></div>
+    <div><h2>Studies behind the settings</h2><p><b>Narrowing:</b> Sourati et al. 2025; Moon et al. (words diversify while ideas converge). <b>Erosion:</b> Rismanchian et al. 2026; Strömberg, Lei &amp; Wu 2026; Liu et al. 2026. <b>Recursion:</b> Burden et al. 2024. <b>Concentration:</b> Burden et al. 2024; Centola 2022. <b>Confidence:</b> Shaw &amp; Nave 2026. <b>Refugia:</b> Rismanchian et al.; Strömberg et al.; Shaw &amp; Nave 2026 (people overrode a faulty AI about one time in five). Most are preprints, not yet peer reviewed.</p></div>
   </div>
 </div>
 <script>
@@ -173,10 +180,10 @@ const MASK=`.....................#......#....#....###############...............
 ....................................#...................................................................................
 ........................................................................................................................`.split("\n"), W=120, H=52, D2R=Math.PI/180;
 // Regional values. on = share of people online: REAL (World Bank / ITU, population-weighted, fetched 25 Nov 2026; refreshed from DATA_URL when set).
-// PLACEHOLDERS: div = linguistic diversity, hue = palette centre, sys = which of six systems serves it.
-const R={na:{div:.35,on:.947,hue:150,sys:0},la:{div:.55,on:.814,hue:108,sys:0},we:{div:.30,on:.923,hue:168,sys:1},ne:{div:.30,on:.898,hue:305,sys:2},
-  me:{div:.40,on:.696,hue:44,sys:1},af:{div:.90,on:.333,hue:26,sys:3},sa:{div:.85,on:.652,hue:338,sys:4},ea:{div:.50,on:.881,hue:16,sys:5},
-  se:{div:.90,on:.756,hue:90,sys:5},ng:{div:1,on:.196,hue:120,sys:3},oc:{div:.45,on:.943,hue:158,sys:0}};
+// div = linguistic diversity: REAL (Greenberg's index by country, population-weighted). PLACEHOLDERS: hue = palette centre, sys = which of six systems serves it.
+const R={na:{div:0.36,on:.947,hue:150,sys:0},la:{div:0.13,on:.814,hue:108,sys:0},we:{div:0.28,on:.923,hue:168,sys:1},ne:{div:0.36,on:.898,hue:305,sys:2},
+  me:{div:0.52,on:.696,hue:44,sys:1},af:{div:0.89,on:.333,hue:26,sys:3},sa:{div:0.83,on:.652,hue:338,sys:4},ea:{div:0.45,on:.881,hue:16,sys:5},
+  se:{div:0.76,on:.756,hue:90,sys:5},ng:{div:0.99,on:.196,hue:120,sys:3},oc:{div:0.29,on:.943,hue:158,sys:0}};
 // REAL (Cloudflare Radar, 28 days to 25 Nov 2026): tp = share of world web traffic per million people online; au = automated share of the region's traffic.
 const BASE={na:[9.25,.541],la:[1.70,.207],we:[4.42,.416],ne:[1.05,.255],me:[.854,.223],af:[.469,.176],sa:[.535,.164],ea:[.603,.358],se:[1.72,.342],ng:[.5,.175],oc:[4.55,.283]};
 for(const k in R){R[k].tp=BASE[k][0]; R[k].au=BASE[k][1];}
@@ -200,139 +207,194 @@ function region(lon,lat){
   return 'ne';
 }
 let seed=11; const rnd=()=>{seed=(seed*1664525+1013904223)>>>0; return seed/4294967296;};
-// ---- nodes on the sphere
-const idx=new Int32Array(W*H).fill(-1), nodes=[];
+// ---- points on the land: several per map cell, loosely scattered
+const PER=5, nodes=[];
 for(let j=0;j<H;j++)for(let i=0;i<W;i++) if(MASK[j][i]==='#'){
-  const lon=(-180+(i+.5)*3+(rnd()-.5)*2.7)*D2R, lat=(78-(j+.5)*135/H+(rnd()-.5)*2.3)*D2R, r=region(lon/D2R,lat/D2R);
-  idx[j*W+i]=nodes.length;
-  nodes.push({i,j,r,X:Math.cos(lat)*Math.sin(lon),Y:Math.sin(lat),Z:Math.cos(lat)*Math.cos(lon),par:-1,hue:0,size:1,seed:false,
-    ph:rnd()*6.283,sp:.6+rnd()*.9,lag:rnd(),ref:rnd(),kids:0});
-}
-// ---- grow a branching forest over the land: long filaments that fork, like hyphae
-const order=[], frontier=[];
+  const lonC=-180+(i+.5)*3, latC=78-(j+.5)*135/H, r=region(lonC,latC);
+  const per=Math.round(PER*(.4+1.2*rnd()));
+  for(let q=0;q<per;q++){const lon=(lonC+(rnd()-.5)*3.8)*D2R, lat=(latC+(rnd()-.5)*3.3)*D2R;
+    nodes.push({i,j,r,X:Math.cos(lat)*Math.sin(lon),Y:Math.sin(lat),Z:Math.cos(lat)*Math.cos(lon),kind:0,to:-1,hub:-1,hue:0,deg:0,far:false,
+      fine:rnd(),ph:rnd()*6.283,sp:.6+rnd()*.9,lag:rnd(),ref:rnd(),born:rnd(),run:rnd(),lw:.5,ax:0,ay:0,az:0,bx:0,by:0,bz:0,sx:0,sy:0,sz:0,ex:0,ey:0,ez:0,mass:1,sig:.02});}}
+// A thread does not stop at its gathering point: it passes close by, a little to one side, and runs on beyond.
+// So no point is drawn; the bright places are where many threads cross.
+const WIG=.34;
+function thru(n,m,sig,f){const tx=m.X+(rnd()-.5)*2*sig, ty=m.Y+(rnd()-.5)*2*sig, tz=m.Z+(rnd()-.5)*2*sig;
+  span(n,[n.X,n.Y,n.Z],[n.X+(tx-n.X)*f,n.Y+(ty-n.Y)*f,n.Z+(tz-n.Z)*f],WIG*.6);}
+// ---- coastline: Natural Earth 1:110m land (public domain), stored as steps in tenths of a degree
+const coast=[]; `-596,-800 -3,-5 -3,-5 -21,1 -22,0 -12,3 0,1 -6,2 23,0 21,-1 8,4 5,4 10,-4;-1592,-795 -19,-1 -13,3 -6,4 -1,0 -6,3 6,4 19,-2 10,-3 7,-3 3,-5;-452,-780 13,-5 4,-6 1,-4 1,-5 -16,-3 -16,-3 -19,-2 -21,-2 -24,0 -13,4 2,4 21,3 9,3 6,4 5,4 6,3 6,5 5,0 15,2 15,-2;-1212,-735 13,-2 12,2 -6,-3 -9,-3 -14,1 -10,3 2,4 12,-2;-1256,-735 16,-4 -6,1 -13,1 -14,2 7,3 10,-3;-990,-719 11,-2 11,1 6,-5 -8,1 -12,-1 -12,1 -14,-1 -10,2 -5,4 6,2 13,-2 14,0;-685,-710 2,-4 -2,-4 -3,-4 -12,-1 -11,-2 -13,0 5,4 -12,-1 -11,-2 -8,3 0,4 11,4 7,1 11,0 3,5 1,4 0,8 5,5 9,1 6,-4 2,-3 4,-5 4,-4 2,-5;-1800,-847 1,0 8,6 18,-4 2,1 2,1 4,1 3,1 1,0 2,0 1,0 14,-4 13,4 2,0 29,2 10,-2 5,-1 15,-4 28,-2 23,-3 38,-3 29,3 43,-2 24,-3 26,3 28,3 2,4 -39,1 -33,2 -8,4 -27,2 2,5 4,4 3,3 -2,5 -16,2 -8,4 -15,3 24,-1 23,2 15,-3 17,3 17,3 8,4 -4,4 -13,2 -14,3 -21,1 -18,1 -19,1 -7,4 -13,3 -8,4 -3,11 5,-1 9,-3 17,1 16,1 8,-4 16,1 13,2 13,3 11,3 15,1 0,4 -4,4 3,3 13,2 6,-3 15,2 12,2 14,0 13,1 14,3 11,2 12,2 8,-1 7,0 14,1 14,-2 13,0 14,2 13,-1 15,-1 14,0 14,0 15,0 14,0 10,3 12,2 13,-2 12,1 11,4 6,-3 4,-4 6,-3 10,3 12,-4 14,-1 11,-3 15,1 12,2 15,-1 14,-1 14,-2 5,4 -7,4 -5,3 -12,1 -6,4 -2,3 -4,8 8,-2 13,0 13,0 12,-1 10,-3 4,-4 14,0 13,1 13,2 13,1 10,-2 13,1 9,7 8,-4 11,-2 13,1 8,-4 13,0 12,-1 12,-3 8,4 4,4 10,-4 14,1 10,-2 7,-4 13,1 10,2 11,3 12,1 14,2 13,1 9,2 6,3 3,5 -2,4 -3,4 -3,3 -3,4 -3,4 0,4 1,4 4,3 4,5 2,3 -2,5 -1,4 4,4 6,3 6,4 7,3 8,3 4,4 6,3 6,3 10,0 6,3 7,2 8,1 7,3 6,3 8,1 6,-2 -4,-4 -10,-3 -4,-2 -8,2 -8,-1 -7,-2 -7,-3 -5,-3 -1,-4 0,-4 5,-3 -7,-2 -9,-1 -6,-3 -6,-3 -6,-5 -2,-4 4,-4 5,-3 8,-2 8,-3 4,-4 2,-4 3,-4 5,-3 3,-4 1,-9 3,-4 1,-4 3,-4 -1,-5 -6,-4 -6,-3 -13,-2 -4,-3 -7,-4 -15,-3 -13,-2 -12,-2 -14,-2 -8,-4 -16,-1 -18,1 -16,-1 -16,0 3,-4 15,-2 11,-3 6,-3 -11,-3 -17,1 -14,-3 -1,-4 0,-4 12,-3 2,-4 12,-4 22,-1 18,-3 14,-3 18,-3 25,-2 24,-2 17,-3 19,-4 10,-4 5,-4 12,3 16,3 18,3 21,3 17,3 25,0 25,-1 20,-3 6,4 14,3 26,1 19,2 19,2 21,1 22,2 15,3 -7,3 -4,4 0,3 -19,0 -21,-2 -19,0 -3,4 1,8 5,2 14,2 17,2 12,3 12,3 9,4 14,2 13,1 7,1 16,1 14,1 13,2 12,2 11,3 14,3 9,3 9,3 3,4 -11,2 4,4 7,4 10,1 11,3 10,3 8,4 5,5 7,2 12,0 5,-4 12,0 0,4 5,4 11,-1 3,-4 12,-1 13,2 12,1 11,0 5,-4 11,3 10,2 11,1 11,1 11,3 11,1 8,3 6,3 8,-2 10,1 8,-5 5,-3 12,2 4,4 10,2 13,0 4,-4 8,4 11,1 12,0 11,0 11,-1 11,-1 4,-3 7,-3 11,2 11,0 12,0 11,0 10,2 11,1 8,3 10,1 10,1 8,3 5,6 6,3 10,-2 4,-3 9,-2 10,0 7,-3 7,-3 11,3 3,4 9,2 11,3 9,1 12,2 8,2 8,3 8,2 9,-1 9,3 7,3 9,0 9,2 1,4 9,3 8,1 10,2 9,1 9,-1 10,-1 8,-2 1,-5 8,-3 6,-3 12,-1 7,-3 8,-3 10,0 8,2 9,4 9,-2 10,-1 9,-2 10,0 10,0 8,-11 0,-2 -1,-5 -10,-2 -8,-4 1,-4 12,0 -2,-4 -5,-3 -5,-5 8,-3 12,-1 11,2 6,4 3,4 6,3 6,3 2,3 6,5 6,1 11,1 10,1 10,1 5,4 3,4 7,4 10,2 8,2 6,4 6,1 7,2 10,-1 9,1 10,1 11,0 7,2 5,7 4,-3 4,-5 9,-1 9,-1 10,1 10,-1 9,0 7,1 8,-1 8,-2 9,2 11,0 9,1 10,-1 7,3 5,3 7,3 12,7 7,-1 7,-3 7,-3 13,-6 10,-1 9,0 11,2 10,1 9,3 6,3 12,0 7,2 8,-2 5,-3 7,-3 11,0 7,-2 12,-3 12,-1 11,1 8,3 6,3 9,1 9,-1 11,-1 9,1 9,0 9,-1 9,-1 9,2 11,2 10,0 11,0 10,1 9,1 2,5 1,4 6,-3 2,-4 3,-4 4,-4 9,-2 11,1 13,0 9,1 13,0 10,0 13,0 11,-1 7,-3 -2,-4 6,-3 11,-2 11,-3 13,-2 14,-1 10,-2 11,0 7,3 9,-2 7,-3 9,-3 12,-1 12,-1 5,-4 11,-2 8,-4 11,-1 11,0 11,-1 12,0 12,0 11,-2 11,-2 10,-2 7,-3 -1,-4 -5,-3 -5,-5 -3,-3 -5,-5 -13,-1 -6,-4 -13,-2 -5,-4 -6,-3 -8,-4 -4,-4 -2,-3 -1,-5 0,-4 6,-4 2,-3 4,-4 19,-1 4,-5 -18,-1 -15,-2 -19,-1 -9,-5 -2,-5 -4,-4 -5,-3 13,-4 5,-4 9,-4 12,-3 14,-3 15,-3 23,-3 5,-5 29,-2 2,-1 7,-3 28,2 23,-3 -3583,-2;-678,-538 13,-7 14,-2 -4,-5 -10,0 -5,3 -3,-4 -8,-3 -11,1 -8,3 -10,1 -13,6 -10,5 -14,12 9,-2 14,-7 13,-4 5,5 3,7 10,4 7,-1 3,-5 5,-7;-585,-511 8,-4 -3,-4 -14,-3 -4,4 -9,-5 -5,5 12,5 8,-2 7,4;703,-497 -16,-1 0,6 2,4 0,2 7,-3 9,-2 1,-2 -3,-4;1454,-408 10,-3 5,1 8,2 6,-1 1,-12 -4,-3 -1,-8 -3,3 -7,-7 -2,0 -7,1 -6,8 -1,7 -6,8 0,5 7,-1;1730,-409 2,-4 8,4 2,-4 0,-5 -3,-4 -7,-8 -5,-4 4,-5 -8,0 -8,-3 -3,-7 -6,-10 -8,-5 -5,-2 -9,0 -6,3 -11,1 -2,3 5,8 13,10 6,2 8,3 8,6 6,5 5,7 4,3 1,5 7,5 2,-4;1746,-362 7,-10 1,7 4,-3 2,-8 8,-3 6,-1 6,4 5,-1 -2,-9 -3,-6 -8,1 -3,-3 1,-5 -1,-2 -4,-5 -5,-7 -8,-4 -1,3 -4,1 5,8 -3,6 -11,4 1,4 7,3 1,8 0,6 -4,7 0,2 -5,4 -7,9 -5,7 4,0 6,-5 7,-3 3,-9;1671,-222 -4,-2 -5,3 -7,4 -7,6 -6,7 -2,3 5,0 5,-4 5,-3 3,-3 8,-6 5,-5;1784,-173 3,-3 -1,-6 -7,-1 -5,1 -1,5 4,3 4,-1 3,2;-1800,-166 3594,-2 -7,-2 -1,4 5,2 3,0 -3594,3 2,1 -1,-5 -1,-1;1678,-165 -3,-1 -3,4 0,3 6,-6;1671,-149 2,-8 -3,1 -2,-1 -1,3 -1,8 5,-3;501,-136 1,-12 3,-4 -1,-5 -2,-3 -3,6 -2,-3 2,-8 -1,-4 -3,-2 -1,-9 -4,-11 -5,-14 -6,-19 -4,-14 -4,-11 -8,-3 -9,-4 -6,3 -8,3 -2,5 -1,9 -4,8 0,7 1,8 5,1 0,4 5,7 1,7 -3,4 -2,7 0,9 3,5 1,7 5,0 6,2 4,2 4,0 6,6 8,6 3,5 -1,4 4,-1 5,7 1,6 3,5 3,-5 3,-4 3,-7;1436,-138 3,-7 7,3 3,-4 5,-4 -1,-4 2,-9 1,-5 3,-1 3,-9 -1,-5 3,-7 11,-5 7,-5 6,-4 -1,-2 6,-7 4,-10 4,2 4,-5 2,2 2,-11 7,-6 5,-4 8,-8 2,-8 1,-5 -1,-7 5,-8 -1,-9 -2,-5 -2,-9 0,-5 -2,-7 -5,-10 -7,-4 -4,-8 -3,-5 -3,-9 -4,-5 -2,-7 -2,-7 1,-3 -6,-4 -11,0 -9,-4 -5,-4 -6,-4 -8,4 -6,2 1,5 -5,-2 -9,-7 -9,3 -5,1 -6,1 -10,3 -6,6 -2,8 -2,5 -5,4 -10,1 3,5 -2,7 -5,-7 -9,-2 6,6 1,6 4,5 -1,7 -8,-9 -6,-3 -4,-8 -8,4 0,6 -6,7 -5,4 2,2 -13,6 -7,0 -10,5 -18,-1 -13,-3 -11,-4 -10,1 -10,-5 -9,-3 -2,-5 -3,-4 -9,0 -6,-1 -9,2 -7,-1 -7,-1 -6,-5 -3,0 -5,-2 -5,-4 -7,1 -7,0 -10,6 -6,2 0,6 5,1 2,2 0,4 1,7 -1,6 -5,10 -2,6 0,5 -4,7 0,3 -4,4 -2,8 -5,8 -2,4 5,-4 -4,9 5,-3 3,-4 0,5 -5,8 -1,3 -2,3 1,6 2,2 1,5 -1,6 4,7 1,-7 4,7 9,3 4,4 8,4 5,1 2,-1 8,3 6,1 2,3 3,0 5,0 11,3 5,5 3,5 5,5 1,4 0,5 7,9 4,-9 5,2 -4,5 3,5 5,-2 1,7 5,5 3,4 5,2 0,3 4,-1 0,2 5,1 5,2 7,-5 6,-6 6,0 6,-1 -2,6 5,8 4,2 -1,3 4,6 6,3 5,-1 9,2 0,5 -8,3 6,2 6,-3 6,-4 8,-2 3,1 6,-3 6,2 4,0 2,1 5,-5 -3,-5 -4,-4 -3,0 1,-4 -3,-5 -4,-5 1,-3 8,-6 8,-3 5,-3 7,-6 3,0 5,-3 2,-3 9,-3 7,3 2,6 2,4 1,6 3,8 -1,4 0,3 -1,6 2,8 1,2 -1,3 2,5 2,6 0,3 4,3 3,-5 1,-6 2,-1 1,-4 3,-5 1,-6 0,-4;1621,-105 3,-3 -7,0 -4,6 6,-2 2,-1;1207,-102 -4,-1 -13,7 9,2 5,-3 4,-3 -1,-2;1609,-99 -4,0 -6,1 -3,2 1,4 7,-2 3,-2 2,-3;1617,-96 -2,-2 -7,9 -2,6 3,0 4,-8 4,-5;1244,-101 -8,-3 -1,2 1,3 4,6 10,4 1,2 8,3 7,0 4,1 3,-1 -3,-3 -11,-4 -8,-3 -7,-7;1179,-81 4,-3 6,1 2,-4 -11,-2 -7,-1 -6,0 4,5 5,1 3,3;1229,-81 -1,-6 -15,-2 -14,1 0,4 8,2 6,-3 7,0 9,4;1599,-83 0,-2 -8,4 -5,3 -4,4 2,1 4,-3 8,-4 3,-3;1575,-73 -2,-1 -4,2 -4,4 0,2 6,-4 4,-3;1086,-68 19,-1 3,4 18,-4 4,-7 15,-2 12,-6 -11,-4 -11,5 -9,-1 -11,1 -9,2 -12,4 -7,1 -4,-2 -18,4 -2,5 -9,0 7,10 12,-1 8,-3 4,-1 1,-4;1347,-62 -5,-7 -1,8 2,3 2,4 2,-3 0,-5;1559,-68 -3,-1 -4,4 -5,6 -2,8 2,1 1,-3 3,-3 4,-6 5,-3 -1,-3;1520,-55 -5,-1 -2,-2 -5,-3 -6,-2 -5,0 -8,3 -6,3 1,3 9,-2 5,1 2,5 1,0 1,-5 6,0 3,4 5,3 -1,6 6,1 2,-2 0,-6 -3,-6;1272,-35 -3,-3 -7,2 -2,4 10,1 2,-4;1305,-31 3,-8 -8,5 -8,0 -6,0 -7,0 2,6 13,0 11,-3;1531,-45 -3,-3 -2,6 -2,4 -4,3 -6,5 -7,3 2,2 6,-3 3,-2 4,-2 4,-5 4,-3 1,-5;1341,-12 3,-16 11,-6 8,11 11,6 9,0 9,-4 7,-3 11,-2 17,-7 19,-6 7,-5 5,-5 2,-6 16,-6 3,-5 -9,-1 2,-7 9,-6 6,-11 6,0 0,-4 7,-2 -3,-2 11,-4 -1,-3 -7,-1 -2,3 -9,1 -10,2 -8,6 -5,6 -6,8 -13,5 -8,-3 -6,-3 1,-8 -8,-3 -5,1 -11,1 -9,8 -10,2 -2,-3 -13,0 4,8 7,3 -3,11 -5,8 -19,9 -8,0 -15,10 -3,-5 -4,-1 -2,4 0,4 -8,5 11,3 7,0 -1,3 -15,0 -4,6 -9,2 -4,5 14,2 5,3 16,-4 1,-4;1252,14 -8,-10 -7,-2 -10,2 -16,0 -9,-2 -2,-7 9,-9 6,4 18,4 0,-5 -5,2 -4,-6 -9,-4 10,-13 -2,-3 9,-12 0,-6 -6,-3 -4,3 5,8 -10,-4 -2,3 1,4 -7,6 1,10 -7,-3 1,-12 0,-14 -6,-2 -4,3 3,9 -2,10 -4,0 -3,7 4,7 1,7 5,16 2,4 9,7 8,-3 12,-1 12,0 10,7 1,-2;1287,11 -1,-8 -5,1 -1,-7 4,-5 -3,-1 -4,6 -3,13 2,8 3,4 1,-6 6,-1 1,-4;1058,-59 -11,0 -8,9 -13,8 -4,6 -8,8 -5,7 -8,14 -8,9 -3,8 -4,8 -9,7 -5,8 -8,6 -10,11 -1,5 6,-1 16,-2 9,-9 7,-7 6,-4 9,-11 11,0 8,-7 6,-8 7,-5 -4,-8 6,-4 4,0 1,-7 4,-5 7,-1 5,-7 -2,-12 -1,-16;1179,18 11,-9 -12,-1 -3,-7 0,-9 -9,-7 -1,-10 -4,-15 -1,3 -11,-4 -4,6 -7,1 -5,3 -12,-4 -4,5 -7,0 -8,1 -1,13 -5,3 -5,8 -1,9 1,9 6,7 7,-3 8,2 2,8 4,2 12,2 7,8 5,6 4,4 9,5 7,7 5,8 4,0 5,-5 1,-4 6,-3 9,-3 -1,-4 -7,0 2,-5 -7,-4 -6,-9 7,-9 -1,-5;1264,84 1,-6 0,-6 -3,-9 -4,10 -4,-5 3,-8 -3,-4 -12,6 -3,7 3,5 -6,4 -3,-4 -5,1 -7,-6 -2,3 4,8 6,3 6,4 3,-5 8,3 2,5 7,0 -1,8 8,-5 1,-5 1,-4;812,62 -9,-2 -4,8 -2,14 4,16 7,-5 5,-7 5,-11 -2,-10 -4,-3;-609,101 -9,-1 -2,1 3,3 0,4 6,1 2,0 0,-8;1240,103 -4,-4 -3,-6 -3,-3 -6,7 2,3 2,3 1,6 6,0 -2,-6 8,9 -1,-9;1185,93 -13,-9 5,7 7,6 6,7 5,10 2,-8 -7,-6 -5,-7;1219,119 6,-3 6,0 0,-4 -5,-5 -6,-3 0,5 0,5 -1,5;1255,122 3,-12 -8,3 0,-3 3,-6 -5,-3 0,7 -3,1 -2,6 6,-1 0,4 -6,8 9,-1 3,-3;1215,131 -2,-9 -5,5 -5,8 9,-1 3,-3;1213,185 6,-3 3,3 1,-3 -1,-4 3,-7 -2,-8 -6,-4 -2,-8 2,-8 6,-1 4,1 13,-5 -1,-6 3,-2 -1,-5 -8,5 -4,6 -2,-4 -7,6 -9,-2 -5,3 1,4 3,2 -3,3 -1,-4 -5,6 -2,4 0,10 4,-4 1,16 3,9 6,0;-656,182 -2,-2 -8,0 -6,-1 0,5 1,1 8,0 5,-1 2,-2;-769,179 -3,-2 -6,2 -5,3 1,3 4,0 2,0 7,-1 5,-2 2,-3 -7,0;-726,199 9,-2 1,2 8,0 6,-3 2,0 2,-3 6,0 -1,-3 5,0 5,-4 -4,-4 -5,2 -4,0 -4,0 -1,-2 -4,0 -2,2 -3,-1 -4,-7 -3,2 0,2 -7,2 -4,-1 -7,1 -4,-2 -6,3 1,4 10,-2 7,-1 4,3 -5,4 0,4 -6,1 2,3 6,0;1103,187 -8,-5 -8,3 -1,9 5,4 11,3 6,0 2,-4 -4,-4 -3,-6;-1555,191 -2,-2 -2,2 0,2 -2,4 1,1 1,2 0,2 0,1 1,-1 4,-1 2,-1 1,-1 3,-4 -4,-3 -3,-1;-1561,206 -3,0 -2,2 -1,1 1,1 3,-1 3,-1 -1,-2;-1568,212 0,-1 -5,0 0,1 5,0;-1577,213 -1,0 -3,0 -2,2 0,1 3,1 1,0 2,-4;-1593,220 -2,-1 -3,2 1,0 1,1 2,0 1,-2;-797,228 4,-4 10,1 3,-2 9,-6 6,-5 3,0 6,-2 -1,-3 8,0 7,-4 -1,-2 -7,-2 -6,0 -7,1 -15,-1 7,5 -4,3 -6,0 -4,3 -2,6 -6,0 -9,2 -3,2 -13,2 -4,2 4,2 -10,1 -7,-5 -4,0 -2,-3 -4,-1 -5,1 6,3 2,4 4,2 5,2 8,1 2,1 9,-1 8,0 9,-3;-775,238 -3,-1 -2,6 -4,3 2,6 3,0 4,-9 0,-5;1212,228 -5,-8 -5,8 -1,8 6,9 8,8 5,-3 -2,-6 -6,-16;-778,266 -11,-2 -1,4 5,1 7,-1 0,-2;-770,266 -2,-7 -2,1 1,5 -5,4 0,1 8,-4;1346,341 2,-3 -6,-6 -4,3 -5,-2 -3,-6 -6,3 0,5 5,6 6,-2 4,5 7,-3;346,357 -7,-5 1,-1 0,-1 -10,-4 -5,1 -2,4 4,0 1,0 1,3 8,0 9,3;237,357 5,-3 8,0 8,0 -1,-2 6,1 -1,-3 -15,-1 0,2 -12,2 2,4;155,382 -3,-8 1,-3 -2,-5 -8,4 -5,1 -14,5 2,5 11,-1 11,1 7,1;92,412 6,-7 -1,-13 -5,0 -4,-3 -4,3 0,12 -2,6 5,-1 5,3;1410,371 -4,-8 2,-5 -5,-7 -13,-4 -18,-1 -14,-11 -7,3 0,8 -18,-2 -11,-5 -12,0 10,-8 -7,-16 -6,-5 -5,4 2,9 -6,3 -4,7 10,3 5,6 10,6 7,6 20,3 11,-2 10,18 7,-5 15,10 5,4 7,12 -2,12 4,6 11,2 5,-14 0,-8 -9,-10 0,-11;96,422 -4,-8 -4,2 -3,7 2,3 7,4 2,-8;1439,442 7,-2 7,4 2,-11 -14,-3 -9,-10 -16,7 -5,-11 -11,0 -2,10 5,7 11,1 3,14 3,8 11,-11 8,-3;-637,465 8,-1 9,0 -5,-4 -4,0 -12,4 -3,3 4,3 3,-5;-618,491 -5,0 -13,3 -9,5 3,1 13,-3 11,-4 0,-2;-1235,485 -5,-1 -17,4 -3,4 -8,3 -2,3 -11,2 -3,5 0,3 11,-2 6,-2 9,-1 4,-4 5,-4 10,-4 4,-6;-561,507 -7,-9 7,3 6,-2 -3,-3 9,-3 4,3 10,-4 -3,-7 7,2 1,-5 4,-7 -5,-8 -4,-1 -7,2 2,8 -2,2 -12,-9 -6,0 7,5 -10,2 -10,0 -20,0 -1,3 6,4 -4,2 8,6 10,16 7,6 8,3 5,0 -2,-3 -5,-6;-1327,540 10,1 -4,-11 9,-8 -4,0 -6,4 -4,5 -5,3 -1,5 0,3 5,-2;1436,507 11,-17 -15,3 -6,-14 9,-11 0,-7 -8,6 -6,-7 -2,8 1,10 -1,11 2,7 1,14 -6,9 1,14 9,5 -4,4 5,2 2,-7 4,-10 -1,-9 4,-11;-68,523 -18,-6 -14,1 8,11 -5,10 14,8 7,4 9,1 10,-6 -5,-7 2,-7 -8,-9;127,556 -6,-8 -11,6 -1,4 15,3 3,-5;-1530,571 -10,-4 -5,3 -2,5 9,3 6,2 6,-1 5,-3 -9,-5;-30,586 -11,-10 10,1 11,0 -2,-8 -9,-9 10,-1 10,-13 7,-1 6,-12 3,-4 12,-2 -1,-6 -6,-3 4,-5 -9,-5 -13,0 -17,-3 -5,2 -6,-5 -9,1 -7,-3 -6,2 15,10 9,2 -16,2 -3,4 11,3 -6,5 2,7 15,-1 2,6 -7,6 -12,2 -3,3 4,4 -3,3 -6,-5 0,10 -6,5 4,10 8,8 8,0 12,0;-1656,599 -6,-1 -6,1 -7,3 10,2 8,-1 1,-4;-793,622 -4,-6 -4,1 -3,3 1,1 4,3 4,0 2,-2;-819,627 -12,-5 -7,0 -2,3 8,4 13,0 0,-2;-1717,638 6,-2 6,1 8,-3 10,-1 -1,-1 -7,-2 -8,2 -4,2 -9,-1 -2,1 1,4;-852,657 2,-5 5,2 6,-3 11,-3 12,-3 0,-5 8,1 7,-4 -9,-3 -15,3 -6,4 -10,-5 -14,-5 -4,5 -13,-1 8,5 2,8 3,9 7,0;-145,665 -2,-7 11,-7 -13,-7 -29,-7 -9,-2 -13,1 -28,4 10,4 -22,5 18,2 0,3 -21,2 6,7 16,1 15,-7 15,6 13,-3 16,5 17,0;-759,671 -11,0 -2,5 4,5 9,2 8,-3 0,-4 -1,-2 -7,-3;-1800,690 25,-8 26,-10 -1,-6 7,-3 -3,8 27,-2 20,-9 -10,-5 -16,-1 -1,-9 -4,-2 -9,0 -8,3 -13,3 -2,5 -10,1 -12,-1 -5,3 2,4 -12,-2 5,-5 -6,-4 3600,0 -13,-5 -13,1 9,-5 6,-8 5,-3 1,-4 -3,-3 -18,2 -28,-7 -9,-1 -16,-8 -14,-6 -4,-4 -14,7 -26,-8 -5,4 -9,-5 -14,2 -3,-7 -12,-10 1,-4 11,-2 -1,-14 -10,-1 -4,-8 4,-4 -17,-6 -4,-11 -15,-2 -3,-11 -14,-9 -4,7 -4,15 -6,22 5,14 9,6 0,4 16,3 17,12 18,10 18,8 8,15 -12,-1 -6,-9 -26,-11 -8,13 -26,-4 -25,-16 8,-7 -22,-2 -15,-1 0,7 -15,2 -13,-5 -30,1 -33,-3 -32,-19 -39,-24 16,-1 5,-6 10,-2 6,5 11,-1 14,-11 1,-9 -8,-10 -1,-12 -4,-16 -15,-14 -4,-7 -13,-12 -14,-11 -6,-6 -14,-6 -6,0 -6,5 -14,-7 -1,-4 -4,1 -4,-4 -3,-3 0,-7 -5,-2 -2,-2 -4,-3 -6,-2 -5,-2 0,-5 -1,-1 4,-1 6,-5 8,-12 3,-6 0,-12 -4,-5 -9,-2 -8,-4 -9,-1 -1,5 2,8 -5,10 8,2 -7,8 -5,2 -1,-1 -3,-1 -1,2 -2,0 -3,2 3,4 2,2 -1,1 3,6 -1,2 -6,1 -4,2 -14,-3 -8,-4 -10,-3 5,5 -2,4 8,6 -6,5 -8,-3 -12,-7 -6,-6 -10,-1 -5,-5 6,-6 8,-2 0,-5 8,-2 11,7 9,-4 7,0 1,-6 -14,-2 -5,-6 -9,-5 -5,-7 10,-5 4,-10 6,-9 7,-8 0,-8 -6,-2 2,-6 6,-3 -2,-8 -2,-8 -6,-1 -7,-10 -8,-14 -9,-12 -14,-9 -14,-8 -11,-1 -6,-5 -4,3 -6,-4 -14,-5 -10,-2 -4,-11 -5,0 -3,7 3,4 -14,3 -5,-1 -13,-9 -8,-9 -2,-7 7,-11 10,-13 9,-6 6,-8 4,-19 -1,-17 -8,-7 -12,-6 -8,-9 -12,-9 -4,6 3,7 -8,6 -8,1 -4,6 -5,10 -9,4 -9,0 2,8 -9,0 -1,-11 -5,-15 -3,-8 0,-8 7,0 4,-9 2,-9 5,-5 6,-2 5,-5 3,-1 6,-6 4,-6 0,-7 -1,-5 1,-3 1,-6 4,-3 3,-9 0,-3 -7,-1 -9,8 -12,8 -1,5 -6,6 -1,9 -4,5 1,7 -2,5 -4,3 -2,5 -5,6 -5,5 -2,-6 -2,5 2,7 3,9 -1,8 3,7 -4,6 1,11 -4,5 -3,12 -2,13 -4,8 -7,-5 -11,-7 -6,1 -6,2 3,13 -2,9 -8,12 2,3 -6,2 -7,8 -3,5 -1,5 -2,5 -4,6 -9,0 1,-4 -3,-6 -5,2 -1,-1 -3,1 -4,1 -1,-4 -7,0 -12,-2 0,-8 -5,-5 -14,-7 -12,-12 -7,-6 -10,-7 0,-4 -5,-3 -9,-3 -5,-1 -3,-8 2,-13 1,-8 -4,-9 0,-17 -6,-1 -4,-8 3,-3 -9,-3 -4,-6 -4,-3 -9,9 -5,14 -4,10 -3,5 -5,9 -3,13 -2,6 -9,14 -4,19 -3,13 0,12 -2,10 -14,-6 -7,1 -13,12 4,4 -3,3 -11,9 -8,2 -3,8 -7,7 -19,-2 -16,0 -14,-1 -19,3 -11,2 -11,1 -4,13 -5,1 -8,-1 -10,-5 -12,3 -10,8 -10,3 -6,9 -8,13 -5,-1 -7,3 -3,-4 -6,1 2,-5 -1,-2 3,-7 4,-9 5,-2 2,-4 7,-4 0,-4 -1,-4 1,-3 3,-3 2,-3 1,-2 -1,7 3,5 3,1 3,-3 0,-6 -2,-6 2,-4 2,1 0,-3 8,2 8,0 6,-1 7,7 7,6 7,7 3,3 1,-1 -1,-4 -1,-2 1,-8 4,-7 6,-3 7,-2 6,-1 5,-6 2,-3 4,-2 0,-2 -4,-6 -1,-3 -4,-3 -4,-7 -5,1 -2,-3 -1,-5 1,-6 -1,-2 -5,0 -6,-3 -1,-5 -2,-2 -6,0 -4,-3 0,-4 -5,-3 -6,1 -6,-3 -5,0 -7,-3 -2,-5 0,-3 -10,-4 -16,-5 -9,-7 -5,-1 -3,1 -5,-4 -7,-2 -8,-1 -3,0 -2,-3 -3,0 -1,-3 -5,0 -3,-1 -7,0 -3,6 1,6 -2,3 -2,7 -3,4 2,1 -1,4 1,2 0,4 -1,5 -4,3 0,4 -5,3 -6,9 -3,8 -7,7 -4,1 -7,10 -1,7 1,6 -6,11 -5,4 -5,2 -3,6 0,2 -3,5 -3,2 -3,8 -7,8 -5,7 -5,0 2,5 0,4 2,4 -1,1 -3,-4 -2,-8 -2,-5 -3,-2 -3,4 -5,4 -7,15 -1,-1 4,-11 6,-10 8,-16 4,-5 3,-6 9,-11 -2,-1 0,-7 12,-9 2,-2 3,-10 -2,-2 1,-10 4,-12 4,-2 5,-4 6,-12 3,-9 5,-5 14,-9 5,-6 6,-6 3,-3 5,-3 2,-3 0,-4 -6,-3 4,-2 4,-2 2,-4 4,-5 5,0 10,3 10,1 9,3 5,1 4,2 5,0 4,0 4,2 6,1 4,3 4,0 0,-3 -1,-5 0,-6 -2,-3 -2,-11 -5,-11 -6,-13 -9,-15 -9,-11 -11,-13 -10,-9 -15,-9 -10,-8 -11,-12 -2,-5 -2,-3 -7,-4 -3,-4 -3,-1 -2,-7 -3,-4 -2,-6 -4,-4 -5,-12 1,-6 6,-3 1,-3 -3,-6 1,-3 -1,-5 3,-6 5,-10 3,-2 2,-5 -1,-10 2,-8 0,-16 2,-5 -3,-7 -4,-7 -6,-6 -10,-4 -11,-5 -11,-11 -4,-1 -7,-8 -4,-2 -1,-7 5,-8 2,-5 0,-3 2,0 -1,-10 -1,-4 2,-2 -1,-4 -5,-4 -8,-3 -12,-6 -4,-3 1,-4 2,-1 -1,-5 -2,-8 -1,-8 -3,-5 -7,-5 -2,-1 -4,-5 -3,-5 -5,-7 -12,-11 -7,-6 -7,-4 -11,-4 -5,-1 -1,-2 -6,1 -5,-2 -11,2 -6,-1 -4,0 -11,-4 -8,-1 -6,-4 -5,0 -4,3 -3,1 -5,4 0,-1 -2,2 1,6 -4,7 3,2 0,7 -6,10 -5,8 -8,13 -7,8 -4,7 -2,10 -3,7 -3,15 0,12 -1,6 -4,4 -5,8 -6,12 -2,7 -8,9 -1,8 -1,6 2,9 3,9 1,5 3,9 2,4 6,6 3,5 1,7 0,6 -3,3 -3,6 -2,6 0,2 3,4 -3,10 -2,7 -5,6 1,2 -1,3 -3,8 -8,10 -10,10 -7,9 -6,10 0,3 2,3 3,8 2,7 -2,2 3,11 2,8 -4,6 -5,2 -2,5 -2,1 0,3 -10,-4 -4,1 -4,-3 -8,1 -5,6 -4,7 -7,7 -7,0 -9,0 -8,-2 -8,-2 -16,-6 -6,-3 -9,-3 -9,3 -4,0 -7,2 -6,0 -12,-2 -7,-3 -10,-4 -2,1 -3,0 -10,4 -9,8 -9,5 -6,7 -3,1 -7,4 -5,5 -2,4 -1,7 -5,6 -4,4 -2,1 -3,2 -1,5 -1,2 -3,1 -6,5 -4,0 -2,3 0,2 -3,2 -1,2 -1,8 1,4 -4,8 -5,3 4,2 5,7 2,5 -1,6 3,5 2,9 -2,10 -1,5 1,5 -2,5 -6,4 1,4 0,5 4,3 3,5 0,3 3,7 6,7 3,1 3,6 0,5 4,7 6,3 7,10 5,4 9,1 8,7 5,3 8,8 -2,13 4,8 1,6 6,6 10,5 8,4 7,10 3,7 7,0 6,-5 10,1 10,-2 4,0 10,5 11,2 6,4 10,3 17,2 16,1 5,-2 10,4 10,0 4,-2 7,0 11,5 7,-2 0,-5 8,4 1,-2 -5,-5 0,-5 3,-2 -1,-9 -6,-5 1,-5 6,0 2,-5 4,-2 12,-3 4,1 8,-2 13,-4 5,-9 9,-2 14,-4 11,-5 5,2 5,5 -3,8 3,4 8,5 6,1 14,-2 3,-4 4,0 3,-2 10,-1 3,-3 13,0 10,-3 9,-3 5,-1 8,3 4,3 9,1 7,-2 3,-5 2,4 8,-3 8,0 5,2 3,3 -1,1 3,5 2,7 1,3 4,8 5,7 -1,8 2,4 -3,5 4,4 -6,-1 -9,2 -7,-6 -15,-1 -8,5 -11,1 -2,-4 -7,-2 -10,6 -11,0 -6,10 -7,5 5,8 -6,5 11,9 15,1 4,7 19,-1 12,6 12,3 17,0 17,-7 14,-4 12,2 9,-1 12,5 1,5 -2,6 -6,4 -6,1 -3,3 -13,9 -12,4 -8,5 7,2 8,8 -5,4 14,4 0,3 -9,-2 -8,-1 -6,-3 -10,-1 -8,-3 0,-6 5,-3 10,1 -2,-4 -11,-2 -13,-5 -6,2 2,4 -10,3 1,2 10,4 -3,2 -16,2 0,4 -10,-1 -3,-6 -8,-7 0,-3 -5,-2 -3,1 -2,-12 -6,-4 -3,-7 3,-6 1,-4 9,-3 -2,-2 -12,-1 -4,-3 -8,-5 -4,4 1,2 -7,1 -5,0 -12,-2 7,-6 -5,-1 -6,0 -5,5 -2,-2 3,-6 5,-5 -4,-2 5,-5 5,-3 0,-5 -9,2 3,-5 -6,-1 4,-9 -7,0 -8,4 -4,8 -2,7 -4,5 -5,5 0,3 -2,1 0,2 -6,4 -1,4 1,7 1,3 -1,2 -2,1 -3,3 -5,2 -9,3 -6,4 -9,3 -8,7 2,1 -5,4 0,4 -6,1 -3,-4 -3,3 0,4 2,1 -8,1 -8,-3 1,-5 -1,-3 3,-5 9,-5 5,-8 11,-8 8,0 3,-3 -3,-2 9,-3 7,-3 9,-5 1,-2 -2,-4 -6,5 -8,1 -4,-6 7,-4 -1,-5 -5,-1 -5,-8 -4,-1 0,3 2,6 2,2 -4,5 -3,5 -4,2 -3,4 -6,2 -5,4 -7,1 -8,4 -9,7 -7,5 -3,10 -5,1 -8,4 -5,-2 -6,-4 -4,-1 -9,-6 -19,3 -15,-3 -1,-6 0,-6 -9,-7 -13,-2 -1,-3 -6,-6 -4,-8 4,-6 -6,-4 -2,-7 -7,-2 -7,-7 -13,0 -10,0 -6,-4 -4,-4 -5,1 -3,4 -3,5 -10,2 -4,-3 -5,2 -5,-1 2,8 -1,6 -5,1 -2,3 1,7 4,4 0,4 2,6 0,4 -2,3 0,4 0,7 -4,4 14,7 12,-1 14,0 11,-2 8,1 16,-1 5,6 2,20 -10,11 -8,5 -15,4 -1,7 13,2 17,-3 -3,12 9,-5 23,8 3,8 9,2 8,2 5,3 9,15 14,4 8,0 2,2 8,0 2,-2 7,5 -2,4 -1,6 -4,5 0,10 2,3 2,3 9,1 4,2 8,3 -1,-5 -2,-3 1,-3 5,-1 -2,-4 -3,1 -8,-7 3,-5 0,-4 10,-2 0,-4 11,2 5,3 11,-4 5,-3 7,3 16,4 12,4 10,-2 1,-3 10,0 2,5 14,3 -2,8 0,8 5,6 9,4 8,-8 8,0 2,8 1,6 -3,-1 -7,3 -1,6 13,3 13,1 10,-2 11,1 11,5 -10,5 -18,-1 -18,-3 -16,-3 -6,6 -10,3 2,10 -4,9 4,6 9,6 23,11 7,2 -1,4 -14,5 -17,-3 -10,-7 2,-6 -16,-8 -20,-9 -7,-14 7,-7 10,-5 -9,-11 -11,-3 -4,-17 -5,-9 -12,1 -6,-8 -12,0 -3,9 -8,11 -8,15 -6,6 -20,-12 -13,-2 -14,5 -4,11 -3,23 9,6 27,9 19,10 19,14 24,19 16,8 28,12 22,5 16,-1 15,8 19,0 18,2 31,-7 -13,-3 11,-6 10,3 17,-6 27,-2 38,-12 8,-4 0,-7 -11,-5 -16,-3 -45,8 -7,-2 16,-7 1,-15 13,-3 8,-2 1,4 -6,5 7,3 24,-6 8,3 -6,7 23,10 9,-1 10,-3 5,7 -8,6 5,6 -7,6 28,-4 5,-5 -12,-1 0,-6 7,-3 16,2 2,6 21,5 35,9 8,-1 -10,-6 12,-1 7,3 19,1 15,4 11,-6 12,6 -11,6 6,4 29,-4 14,-3 36,-11 7,5 -10,5 -1,3 -12,1 4,4 -6,8 0,3 18,9 7,9 7,2 27,-2 2,-6 -10,-8 7,-3 3,-7 -2,-14 11,-6 -5,-7 -19,-14 11,-1 4,3 11,3 3,5 9,5 -6,5 4,7 -11,1 -2,5 8,10 -13,8 18,7 -2,7 5,1 5,-6 -4,-10 11,-1 -5,7 17,4 21,0 18,-6 -9,9 -1,10 18,3 24,-1 21,1 -8,6 12,6 11,0 20,5 26,2 3,2 27,1 8,-2 22,5 19,0 2,5 10,4 24,4 17,-3 -14,-3 23,-1 2,-5 10,2 29,0 22,-5 8,-4 -2,-5 -11,-3 -26,-5 -8,-3 12,-2 15,-2 9,2 5,-7 5,3 16,2 32,-2 2,-5 42,-1 1,7 21,-1 16,0 16,-6 5,-6 -6,-4 12,-8 16,-4 10,10 16,-4 17,3 19,-4 7,3 17,-1 -8,9 14,4 90,-6 9,-6 26,-8 40,2 20,-1 8,-4 -1,-8 12,-3 14,2 18,1 18,-2 19,1 18,-9 12,3 -8,7 5,4 31,-3 21,1 29,-5 -3586,-4;491,413 5,-7 5,-1 3,-2 -8,-1 -2,-8 -2,-4 -3,-2 0,-5 3,-7 9,-2 7,-5 15,-2 15,3 1,2 -2,7 2,11 -8,3 3,7 -7,0 2,9 10,-3 8,4 -7,6 -3,5 -8,-2 -1,-8 -3,7 -1,2 3,4 -2,4 -12,3 -4,9 -6,3 0,3 10,-1 0,7 9,2 8,-1 2,9 -2,7 -10,-1 -8,2 -12,-4 -9,-2 -5,-6 -9,-2 -10,-10 9,-9 -1,-7 11,-12 5,-5;-956,691 -7,-3 -13,3 -8,-1 -14,4 9,3 7,4 10,-2 6,-2 3,-2 7,-4;-1800,715 3600,-7 -11,0 -2,3 -3587,4;-1800,715 1,1 9,0 14,-3 -1,-2 -10,-2 -13,-1 0,7;-905,695 0,-10 13,8 12,-7 -3,-7 10,-7 10,7 7,9 1,11 14,-1 15,-1 13,-5 1,-5 -8,-6 7,-5 -1,-5 -19,-7 -14,-1 -11,3 -3,-5 -9,-9 -3,-4 -12,-7 -14,-1 -8,-4 -1,-6 -11,-2 -13,-8 -10,-11 -4,-8 -1,-12 15,-1 4,-10 5,-7 14,2 19,-4 10,-4 7,-5 12,-3 11,-4 16,-1 11,-1 -1,-8 3,-10 7,-11 15,-10 8,3 5,11 -5,15 -7,6 16,4 11,7 6,7 -1,7 -7,9 -12,7 12,11 -5,9 -3,15 7,3 17,-3 10,-1 9,2 9,-3 12,-6 3,-4 18,0 0,-9 3,-12 9,-2 7,-6 15,6 10,11 6,4 8,-9 13,-12 11,-12 -4,-7 13,-5 9,-6 16,-3 7,-3 4,-8 7,-2 4,-3 1,-12 -7,-3 -7,-4 -17,-3 -12,-9 -17,-1 -22,2 -15,0 -10,-1 -8,-7 -13,-4 -15,-14 -11,-9 8,2 16,13 21,8 15,1 9,-5 -9,-6 3,-11 3,-8 13,-5 17,2 10,11 0,-7 7,-4 -12,-6 -23,-6 -9,-4 -12,-8 -7,1 -1,9 18,8 -16,0 -11,-2 1,-3 -10,-5 -11,-3 -10,-3 -6,-7 -1,-1 0,-6 3,-5 4,0 -1,3 3,-2 -1,-3 -6,-1 -5,0 -8,-2 -4,0 -6,-1 -8,-3 15,2 3,-2 -14,-3 -7,0 0,2 -3,-3 3,-1 -2,-7 -7,-8 -1,3 -2,0 -3,3 2,-5 2,-2 0,-4 -3,-4 -5,-8 -1,1 3,6 -5,4 -2,8 -1,-4 2,-6 -7,1 7,-3 0,-9 3,-1 1,-3 2,-10 -7,-8 -10,-3 -7,-6 -5,0 -5,-4 -1,-3 -11,-7 -6,-5 -4,-6 -2,-7 2,-7 3,-8 5,-7 0,-5 4,-11 0,-7 0,-4 -3,-6 -3,-1 -5,1 -1,4 -4,3 -5,8 -5,8 -2,4 2,7 -2,5 -8,8 -4,2 -10,-5 -2,1 -5,5 -6,2 -11,-1 -9,1 -8,-1 -4,-1 2,-3 0,-4 2,-2 -2,-1 -4,1 -4,-2 -7,0 -7,6 -9,-1 -7,2 -6,-1 -9,-2 -9,-8 -10,-4 -5,-5 -3,-4 0,-7 1,-5 2,-3 -4,-9 -2,-7 -1,-14 -1,-5 2,-5 3,-5 2,-8 7,-7 2,-6 4,-5 11,-2 4,-5 9,3 7,1 8,2 6,2 6,4 3,6 0,8 2,3 7,3 11,2 8,0 6,0 3,-2 0,-5 -6,-5 -2,-7 2,-1 -2,-5 -2,-7 -3,2 -2,0 0,-1 2,-1 0,-2 -2,-5 1,-1 -1,-4 1,-1 -2,-5 -2,-2 -1,-1 -2,-3 3,-2 1,2 3,-2 1,0 2,2 3,0 1,-1 1,0 5,0 5,0 3,1 1,1 3,0 3,-1 2,0 2,1 5,-1 1,-1 3,-2 3,-2 4,-1 3,-3 -1,-1 -1,-2 1,-4 -2,-3 -1,-4 -1,-5 1,-2 0,-5 -1,-1 -1,-4 0,-3 -2,-2 1,-3 1,-2 3,-5 4,-4 5,-4 3,-4 0,-2 4,0 1,0 3,-2 5,1 4,2 6,2 3,3 6,0 -1,-1 6,-1 4,-2 4,-3 3,-2 6,-1 7,7 4,1 0,4 2,8 6,5 6,0 1,2 8,-1 8,5 4,3 4,4 4,0 3,-3 -2,-3 -1,-3 -5,-1 3,-4 0,-6 -5,-5 4,-8 4,0 3,8 -4,3 0,8 12,4 -1,4 4,4 3,-7 7,-1 7,-5 0,-3 9,-1 11,1 5,-4 8,-1 6,3 0,2 12,1 12,0 -8,-3 3,-5 8,0 8,-5 1,-8 5,0 4,-2 7,-4 6,-7 0,-5 4,0 6,-5 4,-3 12,-2 1,2 8,0 10,-2 4,-2 7,-2 11,-8 1,-4 4,0 2,-6 6,-17 5,-2 1,-7 -8,-8 3,-3 18,-1 0,-10 8,6 12,-3 17,-7 5,-5 -2,-6 12,3 19,-5 15,0 15,-8 13,-11 7,-3 9,0 4,-4 3,-12 2,-6 -4,-17 -5,-6 -14,-14 -7,-12 -7,-8 -3,-1 -3,-7 1,-19 -3,-15 -1,-7 -3,-4 -2,-13 -10,-13 -1,-10 -9,-5 -2,-6 -11,0 -15,-4 -8,-4 -11,-3 -11,-8 -9,-10 -1,-7 1,-6 -2,-10 -2,-5 -7,-5 -11,-18 -9,-8 -7,-4 -4,-10 -7,-6 -4,-6 -11,-6 -8,2 -5,-1 -9,5 -7,-1 -6,6 -1,-5 13,-9 -2,-7 7,-4 -1,-5 -9,-13 -15,-5 -20,-2 -11,1 2,-6 -2,-8 2,-5 -6,-3 -11,-2 -9,4 -4,-3 1,-10 7,-3 5,4 3,-6 -9,-3 -8,-6 -1,-10 -3,-5 -9,0 -8,-6 -3,-7 10,-7 10,-2 -4,-9 -12,-6 -6,-12 -9,-4 -4,-4 3,-11 6,-6 -4,1 -9,0 -4,-2 -9,-4 -2,-9 -4,-1 -12,4 -11,7 -12,5 -4,7 3,6 -5,6 -1,17 4,10 11,8 -15,3 9,8 3,17 12,-4 5,21 -7,3 -3,-13 -6,2 3,14 3,19 5,6 -3,10 -1,11 4,1 6,16 7,16 5,15 -3,15 3,8 -1,12 6,13 2,19 3,21 3,22 -1,16 -2,15 -10,5 -1,4 -19,10 -18,11 -8,7 -4,8 1,3 -8,13 -10,18 -9,20 -4,5 -4,7 -7,7 -8,4 4,4 -5,10 3,7 8,6 5,7 -2,5 -4,-5 -6,5 2,2 -1,9 3,2 2,6 4,7 -1,4 6,2 6,4 -1,3 4,1 -1,5 3,3 5,1 4,6 4,5 -4,3 2,6 -2,9 2,2 -2,9 -4,5 -3,3 -2,6 2,2 -2,1 -2,3 -5,3 -5,-1 -2,-3 -4,-3 -2,0 -1,-2 5,-6 -3,-1 -1,-1 -5,-1 -2,6 -1,-2 -3,1 -2,4 -4,1 -3,1 -4,0 0,-2 -2,1 -5,2 -2,3 1,1 0,3 -3,2 -4,2 -3,1 -1,3 -3,2 1,-3 -2,-2 -2,2 -4,1 -1,2 0,3 1,4 -2,1 2,2 -4,3 -4,4 -2,3 -5,4 -5,4 1,2 2,-2 1,1 -2,3 -3,1 -1,-3 -6,1 -3,1 -5,2 -5,0 -3,2 -5,2 -6,0 -5,2 -5,4 -12,11 -5,3 -8,3 -6,-1 -8,-3 -5,-1 -7,2 -7,2 -9,5 -8,1 -11,5 -9,4 -2,3 -6,1 -10,3 -4,4 -11,6 -5,6 -2,5 3,1 -1,3 2,3 0,3 -3,5 -1,4 -3,5 -9,10 -10,7 -5,7 -9,4 -1,2 1,6 -5,3 -6,5 -2,7 -6,0 -6,6 -4,5 -1,3 -5,7 -4,8 1,4 -8,4 -3,-1 -6,3 -1,-4 1,-5 1,-7 4,-4 7,-7 2,-3 1,0 2,-4 1,0 2,-6 3,-3 3,-3 6,-5 3,-10 3,-4 3,-5 0,-5 5,0 4,-5 4,-4 0,-2 -5,-4 -1,0 -3,6 -7,6 -7,5 -5,2 0,8 -1,5 -5,3 -7,5 -1,-2 -2,3 -7,2 -6,6 1,1 4,-1 4,4 0,5 -7,7 -6,3 -4,6 -4,6 -4,8 -4,9 -2,5 -6,6 -5,1 -1,3 -6,1 -3,2 -10,1 -2,2 -1,6 -10,10 -8,14 0,2 -5,3 -7,9 -2,8 -5,5 2,8 0,9 -3,8 4,9 2,18 -2,14 -3,8 -3,5 1,2 15,-4 5,-9 3,3 -2,8 -3,8 -2,0 -19,10 -7,4 -18,4 -6,9 2,6 -13,5 -2,8 -12,7 0,5 -6,4 -9,3 -2,9 -13,8 -6,9 -9,1 -16,0 -12,3 -21,10 -9,2 -18,4 -14,-1 -19,5 -12,4 -11,-2 2,-7 -6,-1 -11,-2 -9,-3 -11,-2 -2,5 5,10 11,3 -3,3 -13,-6 -7,-6 -14,-7 7,-5 -9,-8 -11,-4 -10,-3 -3,-4 -15,-5 -3,-5 -12,-4 -7,0 -9,-2 -10,-4 -9,-3 -17,-3 -1,2 11,4 9,3 11,6 12,1 5,4 14,6 2,2 8,4 1,7 6,6 -12,-3 -3,2 -6,-4 -6,5 -3,-3 -4,5 -10,-4 -6,0 -1,6 2,3 -6,4 -13,-2 -9,5 -6,2 -1,6 -7,4 4,6 8,5 3,5 8,1 7,-1 8,4 8,0 7,3 -2,4 -5,2 7,4 -6,0 -11,-2 -3,-3 -7,3 -15,-2 -14,3 -4,4 -13,6 14,4 22,5 8,0 -1,-5 21,0 -8,6 -12,4 -7,5 -10,4 -14,4 6,5 18,0 12,5 3,5 10,4 10,1 19,5 9,-1 15,6 15,-3 8,-4 4,2 17,-1 -1,-2 16,-2 10,1 21,-3 19,-1 8,-1 13,2 15,-3 11,-2 19,-2 16,-5 10,-1 9,4 12,3 15,-1 15,4 16,3 7,-4 7,2 3,5 7,-1 16,-9 14,7 1,-8 12,2 4,3 12,-1 16,-4 23,-4 14,-2 10,1 13,-5 -14,-5 18,-2 27,1 9,2 10,-6 11,5 -10,4 6,4 12,0 9,1 8,-2 10,-6 11,1 17,-5 16,2 15,0 -2,6 9,2 16,-4 0,-9 6,8 8,0 5,10 -11,6 -12,4 1,11 12,7 13,-1 10,-5 14,-11 -9,-5 19,-2;-1142,731 -5,-4 23,3 13,-5 12,5 9,-4 8,-9 5,4 -7,10 9,1 10,-1 11,-4 6,-10 3,-7 17,-5 18,-5 -1,-4 -16,-1 6,-4 -3,-3 -18,1 -18,3 -11,-1 -19,-3 -30,-2 -13,-1 -6,5 -13,3 -9,-1 -12,8 6,1 16,1 14,0 13,2 -19,2 -22,-1 -14,0 -5,4 23,4 -16,0 -17,3 8,7 7,4 27,6 10,-2;-1045,734 -9,-6 -15,7 3,1 13,0 8,-2;-763,731 0,-3 -10,1 -11,0 -11,-2 -3,1 -11,5 1,4 4,1 23,-1 18,-6;-866,732 8,-7 9,8 26,5 17,-11 -2,-6 20,3 10,4 22,-6 14,-4 1,-5 19,3 10,-7 24,-4 9,-4 9,-9 -18,-5 23,-6 16,-3 15,-9 15,0 -3,-7 -17,-12 -12,4 -16,10 -13,-1 -1,-6 10,-6 14,-5 4,-2 6,-10 -3,-7 -13,2 -25,8 14,-8 11,-6 1,-4 -27,4 -21,6 -12,5 3,3 -15,5 -14,5 0,-3 -29,-2 -9,4 7,7 19,0 20,2 -3,3 4,5 12,10 -2,4 -4,4 -15,5 -21,3 7,2 -11,7 -9,0 -8,4 -5,-3 -18,-2 -36,3 -22,3 -16,1 -8,4 10,4 -14,0 -3,10 8,9 10,4 26,3 -8,-6;-1004,738 12,-2 18,2 3,-3 -10,-5 16,-4 -2,-9 -17,-4 -9,1 -7,3 -25,8 0,3 21,-1 -11,7 11,4;1436,732 -15,0 -21,1 -1,1 9,4 13,1 14,-4 1,-3;-932,728 -11,-8 -11,1 -6,8 0,5 5,5 10,2 21,0 19,-2 -15,-9 -12,-2;-1205,714 -26,-5 -5,4 -23,6 3,3 8,8 9,7 -10,6 34,1 14,-2 25,0 10,-3 11,-4 -13,-3 -24,-7 -13,-7 0,-4;1507,751 -11,-4 -16,1 -19,4 3,3 18,-2 25,-2;-936,750 -6,-4 -14,1 -12,2 5,5 14,2 9,-3 4,-3;1451,756 -8,-8 -37,0 -16,-2 -20,7 5,6 13,2 27,0 36,-5;-985,767 8,-4 0,-6 -5,-7 -16,-1 -11,2 0,5 -16,0 -1,7 11,0 15,3 14,0 1,1;-1082,762 4,-4 9,2 10,0 2,-5 -6,-5 -34,-1 -25,-5 -15,0 -2,3 21,5 -45,-2 -14,2 14,10 9,3 28,-4 18,-6 17,0 -14,9 9,4 10,-1 4,-5;575,707 -6,-1 -32,2 -3,4 -18,3 -1,5 10,2 -1,6 20,8 -9,2 24,8 -3,5 23,5 33,7 33,1 17,4 20,1 7,-4 -7,-3 -36,-5 -30,-4 -31,-10 -15,-10 -16,-9 2,-9 19,-8;-947,771 11,-3 20,0 9,-3 -3,-4 12,-3 6,-2 14,0 14,-1 16,2 20,1 17,-1 10,-4 3,-4 -7,-2 -14,-3 -13,2 -29,-2 -20,0 -17,1 -26,3 -4,6 -1,5 -10,4 -21,1 -11,4 4,4 20,-1;-1162,776 -1,-7 -8,-4 -9,0 -19,-4 -16,-2 -14,2 17,8 21,6 15,0 14,1;-938,775 -5,0 -19,1 -2,2 20,0 7,-2 -1,-1;-1102,777 -19,-3 -14,3 8,4 14,1 14,-2 -3,-3;247,779 -22,-5 -18,3 7,2 -6,4 21,2 4,-4 14,-2;-1097,786 -12,-2 -16,0 0,2 10,3 5,-1 13,-2;-958,781 -15,-3 -8,3 -5,4 0,4 13,-1 5,0 12,-4 -2,-3;-1001,783 4,-4 -16,1 -16,3 -23,1 10,3 -12,2 -1,4 20,-1 27,-4 7,-5;1051,783 -57,-4 19,13 8,1 7,0 26,-6 -3,-4;183,797 32,-7 -25,-4 -5,-8 -9,-2 -5,-8 -12,0 -21,6 9,3 -15,3 -20,9 -8,8 28,3 5,-3 14,0 4,3 15,1 13,-4;254,804 20,-3 -15,-6 -29,-1 -29,2 -2,2 -14,1 -11,4 31,3 14,-2 10,3 25,-3;511,805 -13,-1 -9,-1 -1,-1 -12,-2 -11,2 6,4 -23,0 20,2 15,0 2,-3 6,3 9,1 15,-2 -4,-2;999,789 -21,-1 -28,2 -17,4 -8,7 -13,2 26,7 21,3 20,-6 23,-9 -3,-9;-870,797 12,-4 -14,-3 -18,-7 -18,-1 -21,1 -11,5 1,3 8,3 -19,0 -11,3 -6,5 7,4 7,3 10,1 -4,2 23,1 13,-6 17,-2 16,-2 8,-6;-685,831 27,-1 21,-1 18,-3 0,-2 -24,-5 -25,-2 -9,-2 22,0 -23,-6 -17,-3 -17,-8 -20,-2 -7,-2 -30,-1 14,-1 -7,-2 8,-5 -9,-3 -16,-3 -5,-4 -14,-3 2,-2 17,0 0,-2 -27,-6 -26,3 -29,-2 -15,1 -19,1 -1,5 18,2 -5,7 7,1 26,-5 -13,7 -17,2 8,4 18,2 3,3 -14,4 -4,6 27,-1 8,-1 16,4 -23,1 -35,-1 -18,4 -8,4 -12,3 -2,3 15,2 12,0 19,2 15,4 12,-1 11,-3 8,6 13,1 18,1 30,1 6,-1 29,1 21,0 22,-1;-271,835 63,-8 -19,-4 -38,0 -54,-1 5,-2 35,1 31,-3 19,3 8,-4 -11,-5 26,3 48,4 30,-2 6,-4 -41,-7 -5,-3 -32,-1 23,-1 -12,-7 -8,-6 0,-12 12,-6 -15,-1 -17,-3 19,-5 2,-9 -11,0 13,-9 -22,-1 12,-4 -4,-3 -14,-2 -14,0 13,-7 0,-4 -20,4 -5,-3 14,-2 13,-6 3,-8 -17,-2 -8,4 -12,5 3,-6 -12,-6 27,0 14,-1 -27,-8 -27,-8 -30,-4 -11,0 -10,-4 -14,-10 -22,-7 -6,-1 -14,-2 -14,-2 -9,-7 0,-7 -5,-6 -16,-8 4,-8 -5,-8 -5,-10 -14,-1 -15,9 -20,0 -9,5 -7,10 -17,12 -5,7 -2,9 -14,9 4,7 -7,4 10,12 15,3 4,4 2,8 -11,-3 -6,-2 -9,-1 -12,3 -1,7 4,5 10,0 20,-2 -17,6 -9,3 -10,-1 -8,3 11,9 -6,4 -8,7 -12,10 -13,4 0,4 -27,6 -21,1 -27,-1 -24,0 -12,3 -17,6 26,3 20,1 -42,2 -23,4 1,4 38,5 37,5 4,4 -27,3 9,4 34,7 15,1 -4,5 23,2 31,2 31,0 11,-3 26,5 24,-3 14,-1 21,-3 -24,5 1,4 34,6 35,0 13,3 35,1 80,-1`.split(';').forEach(ring=>{let x=0,y=0,px=0,prev=null; ring.split(' ').forEach(t=>{const d=t.split(','); x+=+d[0]; y+=+d[1];
+  const lon=x/10*D2R, lat=y/10*D2R, p=[Math.cos(lat)*Math.sin(lon),Math.sin(lat),Math.cos(lat)*Math.cos(lon)];
+  if(prev&&!(Math.abs(x)>=1799&&Math.abs(px)>=1799)&&y>-880) coast.push([prev,p]); prev=p; px=x;});});
+const ang=(a,b)=>Math.acos(Math.max(-1,Math.min(1,a.X*b.X+a.Y*b.Y+a.Z*b.Z)));
+// ---- hubs: a few per region, each with its own hue (spread set by the region's linguistic diversity)
 const byReg={}; nodes.forEach((n,k)=>{(byReg[n.r]=byReg[n.r]||[]).push(k);});
-const seeds=[];
-for(const r in byReg){const list=byReg[r], ns=Math.max(1,Math.round(list.length/55));
-  for(let s=0;s<ns;s++){const k=list[Math.floor(rnd()*list.length)], n=nodes[k]; if(n.seed) continue;
-    n.seed=true; n.vis=true; n.hue=bio(unf(R[r].hue)+(rnd()-.5)*190*R[r].div); seeds.push(k); frontier.push(k); order.push(k);}}
-function nbrs(n){const out=[]; for(let dj=-1;dj<=1;dj++)for(let di=-1;di<=1;di++){ if(!di&&!dj) continue; const j=n.j+dj; if(j<0||j>=H) continue;
-  const i=(n.i+di+W)%W, k=idx[j*W+i]; if(k>=0&&!nodes[k].vis) out.push(k);} return out;}
-while(frontier.length){
-  const pick=frontier.length-1-Math.floor(Math.pow(rnd(),1.6)*Math.min(frontier.length,14)), k=frontier[pick], n=nodes[k], nb=nbrs(n);
-  if(!nb.length){frontier.splice(pick,1); continue;}
-  const c=nb[Math.floor(rnd()*nb.length)], m=nodes[c];
-  m.vis=true; m.par=k; m.hue=bio(unf(n.hue)+(unf(R[m.r].hue)-unf(n.hue))*.08+(rnd()-.5)*30*R[m.r].div); n.kids++; frontier.push(c); order.push(c);
-}
-nodes.forEach((n,k)=>{ if(!n.vis){n.vis=true; n.hue=R[n.r].hue; order.push(k);} });   // isolated islands
-for(let q=order.length-1;q>=0;q--){const n=nodes[order[q]]; if(n.par>=0) nodes[n.par].size+=n.size;}
-// for the sealed-off ending: each branch tip can loop back to an ancestor inside its own system
-nodes.forEach(n=>{let a=n.par,h=0; while(a>=0&&h<3){a=nodes[a].par;h++;} n.back=(a>=0&&R[nodes[a].r].sys===R[n.r].sys)?a:-1;});
-// ---- fur: short curling hyphae around every node, stored as points on the sphere
-const HN=7, hair=new Float32Array(nodes.length*HN*6);
-nodes.forEach((n,k)=>{const el=Math.hypot(n.Z,n.X)||1, ex=n.Z/el, ez=-n.X/el, nx=n.Y*ez, ny=n.Z*ex-n.X*ez, nz=-n.Y*ex;
-  for(let h=0;h<HN;h++){let th=rnd()*6.283, x=0, y=0; const len=(.007+.03*rnd()*rnd())*(1+.6*R[n.r].div);
-    for(let s=0;s<2;s++){x+=Math.cos(th)*len; y+=Math.sin(th)*len; th+=(rnd()-.5)*2.4;
-      const o=(k*HN+h)*6+s*3; hair[o]=n.X+ex*x+nx*y; hair[o+1]=n.Y+ny*y; hair[o+2]=n.Z+ez*x+nz*y;}}});
-// ---- long strands between seeds: a peer mesh, and a hub-and-spoke alternative
+const hubs=[];
+for(const r in byReg){const L=byReg[r], nh=Math.max(1,Math.round(L.length/PER/40));
+  for(let s=0;s<nh;s++){const k=L[Math.floor(rnd()*L.length)], n=nodes[k]; if(n.kind===2) continue;
+    n.kind=2; n.hub=k; n.hue=bio(unf(R[r].hue)+(rnd()-.5)*190*R[r].div); hubs.push(k);}}
+// ---- knots: local gathering points that run a long thin line to a hub.
+// About one in twelve reaches to a hub in ANOTHER region (nearer ones more likely), carrying that region's color in with it.
+const knots=[], FAR=.085;
+nodes.forEach((n,k)=>{ if(n.kind===2||rnd()>1/(PER*8)) return; n.kind=1; knots.push(k);
+  const same=hubs.filter(h=>nodes[h].r===n.r); let h;
+  if(rnd()<FAR||!same.length){const oth=hubs.filter(q=>nodes[q].r!==n.r); let tot=0; const w=oth.map(q=>{const x=Math.exp(-ang(n,nodes[q])/.30); tot+=x; return x;});
+    let u=rnd()*tot, x=0; while(x<oth.length-1&&(u-=w[x])>0) x++; h=oth[x]; n.far=true;}
+  else {same.sort((p,q)=>ang(n,nodes[p])-ang(n,nodes[q])); h=same[Math.min(same.length-1,rnd()<.75?0:1)];}
+  const b=nodes[h]; n.hub=h; n.to=h; b.deg++; n.hue=bio(unf(b.hue)+(rnd()-.5)*44*R[b.r].div);
+  n.mass=Math.exp((rnd()+rnd()+rnd()-1.5)*1.5); n.sig=.010+.030*rnd(); n.lw=.55+.55*Math.min(2.4,Math.sqrt(n.mass)); thru(n,b,.03,1.05+.4*rnd());});
+// ---- the fine threads. Most run BETWEEN two nearby gathering places, passing close to each and on beyond,
+// so the web is made of lines and the gathering places show only as crossings. The rest start from open ground.
+const knotCell=new Map(); knots.forEach(k=>{const n=nodes[k], key=n.j*W+n.i; if(!knotCell.has(key)) knotCell.set(key,[]); knotCell.get(key).push(k);});
+const jit=(m,sig)=>[m.X+(rnd()-.5)*2*sig,m.Y+(rnd()-.5)*2*sig,m.Z+(rnd()-.5)*2*sig];
+// Each thread is a gentle curve, not a ruled line: two guide points a third and two thirds of the way along are pushed
+// a little to one side or the other (WIG = sideways push as a share of the thread's length), often in an S.
+function span(n,P,Q,wig){let l=Math.hypot(P[0],P[1],P[2])||1; n.sx=P[0]/l; n.sy=P[1]/l; n.sz=P[2]/l; l=Math.hypot(Q[0],Q[1],Q[2])||1; n.ex=Q[0]/l; n.ey=Q[1]/l; n.ez=Q[2]/l;
+  const w=wig===undefined?WIG:wig, nx=n.sy*n.ez-n.sz*n.ey, ny=n.sz*n.ex-n.sx*n.ez, nz=n.sx*n.ey-n.sy*n.ex;
+  const b1=(rnd()-.5)*w, b2=(rnd()<.55?-b1:b1)*(.4+.6*rnd())+(rnd()-.5)*w*.3;
+  let x=n.sx*2/3+n.ex/3+nx*b1, y=n.sy*2/3+n.ey/3+ny*b1, z=n.sz*2/3+n.ez/3+nz*b1; l=Math.hypot(x,y,z)||1; n.ax=x/l; n.ay=y/l; n.az=z/l;
+  x=n.sx/3+n.ex*2/3+nx*b2; y=n.sy/3+n.ey*2/3+ny*b2; z=n.sz/3+n.ez*2/3+nz*b2; l=Math.hypot(x,y,z)||1; n.bx=x/l; n.by=y/l; n.bz=z/l;}
+nodes.forEach((n,k)=>{ if(n.kind) return; let best=-1,bd=-2; const cand=[];
+  for(let dj=-7;dj<=7;dj++){const j=n.j+dj; if(j<0||j>=H) continue;
+    for(let di=-7;di<=7;di++){const L=knotCell.get(j*W+((n.i+di+W)%W)); if(!L) continue;
+      for(const q of L){const m=nodes[q], dot=n.X*m.X+n.Y*m.Y+n.Z*m.Z, d=dot+.0035*Math.log(m.mass)+(rnd()-.5)*.004; cand.push(q); if(d>bd){bd=d;best=q;}}}}
+  if(best<0){let hd=9; for(const q of hubs){const d=ang(n,nodes[q]); if(d<hd){hd=d;best=q;}}}
+  const m=nodes[best]; n.to=best; n.hub=m.kind===2?best:m.hub; n.far=m.far; n.hue=bio(unf(m.hue)+(rnd()-.5)*30*R[n.r].div);
+  const roll=rnd();
+  if(cand.length>1&&roll<.5){ // between two gathering places
+    let tot=0; const w=cand.map(q=>{if(q===best) return 0; const x=nodes[q].mass*Math.exp(-ang(m,nodes[q])/.11); tot+=x; return x;});
+    let u=rnd()*tot, x=0; while(x<cand.length-1&&(u-=w[x])>0) x++; const mb=nodes[cand[x]===best?cand[(x+1)%cand.length]:cand[x]];
+    const A=jit(m,m.sig), B=jit(mb,mb.sig), g1=.08+.55*rnd(), g2=.08+.55*rnd();
+    span(n,[A[0]+(A[0]-B[0])*g1,A[1]+(A[1]-B[1])*g1,A[2]+(A[2]-B[2])*g1],[B[0]+(B[0]-A[0])*g2,B[1]+(B[1]-A[1])*g2,B[2]+(B[2]-A[2])*g2]);
+    n.lw=.40+.36*Math.min(2.8,Math.sqrt(m.mass*mb.mass));   // threads between busy places are heavier
+  } else if(roll<.74){const T=jit(m,m.sig||.02), f=1.2+1.2*rnd(); span(n,[n.X,n.Y,n.Z],[n.X+(T[0]-n.X)*f,n.Y+(T[1]-n.Y)*f,n.Z+(T[2]-n.Z)*f]);
+  } else { // a feather: it leaves the web, bends, and fades out with no destination, as hyphae do at a growing edge
+    let ox=n.X-m.X, oy=n.Y-m.Y, oz=n.Z-m.Z; const ol=Math.hypot(ox,oy,oz)||1, L=.025+.11*rnd()*rnd();
+    span(n,[n.X,n.Y,n.Z],[n.X+(ox/ol+(rnd()-.5)*1.6)*L,n.Y+(oy/ol+(rnd()-.5)*1.6)*L,n.Z+(oz/ol+(rnd()-.5)*1.6)*L],.9);
+    n.feather=true; n.fine=.6+.4*rnd();}
+});
+// ---- long strands between hubs: a peer mesh, and a hub-and-spoke alternative
 function slerp(a,b,steps){const dot=Math.max(-1,Math.min(1,a.X*b.X+a.Y*b.Y+a.Z*b.Z)), om=Math.acos(dot), so=Math.sin(om)||1, pts=[];
   for(let s=0;s<=steps;s++){const t=s/steps, k1=Math.sin((1-t)*om)/so, k2=Math.sin(t*om)/so, lift=1+.10*Math.sin(Math.PI*t)*Math.min(1,om/1.2);
-    pts.push([ (a.X*k1+b.X*k2)*lift,(a.Y*k1+b.Y*k2)*lift,(a.Z*k1+b.Z*k2)*lift ]);} return pts;}
-const ang=(a,b)=>Math.acos(Math.max(-1,Math.min(1,a.X*b.X+a.Y*b.Y+a.Z*b.Z)));
+    pts.push([(a.X*k1+b.X*k2)*lift,(a.Y*k1+b.Y*k2)*lift,(a.Z*k1+b.Z*k2)*lift]);} return pts;}
 const mesh=[], hubArcs=[];
-seeds.forEach(k=>{const a=nodes[k]; const others=seeds.filter(o=>o!==k&&nodes[o].r!==a.r).sort((p,q)=>ang(a,nodes[p])-ang(a,nodes[q]));
-  [others[0],others[2+Math.floor(rnd()*4)]].forEach(o=>{ if(o!==undefined&&k<o||rnd()<.25&&o!==undefined) mesh.push({a:k,b:o,pts:slerp(a,nodes[o],18)}); });});
-const hubs=['na','we','ea'].map(r=>seeds.filter(k=>nodes[k].r===r).sort((p,q)=>nodes[q].size-nodes[p].size)[0]).filter(k=>k!==undefined);
-seeds.forEach(k=>{ if(hubs.includes(k)) return; const a=nodes[k], h=hubs.slice().sort((p,q)=>ang(a,nodes[p])-ang(a,nodes[q]))[0]; hubArcs.push({a:k,b:h,pts:slerp(a,nodes[h],18)}); });
-for(let x=0;x<hubs.length;x++)for(let y=x+1;y<hubs.length;y++) hubArcs.push({a:hubs[x],b:hubs[y],pts:slerp(nodes[hubs[x]],nodes[hubs[y]],22),trunk:true});
+hubs.forEach(k=>{const a=nodes[k], others=hubs.filter(o=>o!==k&&nodes[o].r!==a.r).sort((p,q)=>ang(a,nodes[p])-ang(a,nodes[q]));
+  [others[0],others[1],others[2+Math.floor(rnd()*4)]].forEach(o=>{ if(o!==undefined&&(k<o||rnd()<.25)) mesh.push({a:k,b:o,ph:rnd(),pts:slerp(a,nodes[o],18)}); });});
+const big=['na','we','ea'].map(r=>hubs.filter(k=>nodes[k].r===r).sort((p,q)=>nodes[q].deg-nodes[p].deg)[0]).filter(k=>k!==undefined);
+hubs.forEach(k=>{ if(big.includes(k)) return; const a=nodes[k], h=big.slice().sort((p,q)=>ang(a,nodes[p])-ang(a,nodes[q]))[0]; hubArcs.push({a:k,b:h,ph:rnd(),pts:slerp(a,nodes[h],18)}); });
+for(let x=0;x<big.length;x++)for(let y=x+1;y<big.length;y++) hubArcs.push({a:big[x],b:big[y],ph:rnd(),pts:slerp(nodes[big[x]],nodes[big[y]],22),trunk:true});
 
 // ---- the model
 const Y0=2026,Y1=2100,N=Y1-Y0+1;
-const st={a:1,n:1,e:1,k:1,c:1,r:0};
+const st={a:1,n:1,e:1,q:1,k:1,c:1,r:0};
 let track;
 function compute(){
   const amax=.30+.55*st.a, nar0=.16+.34*st.n, ero0=.02+.08*st.e, conc=.35+.65*st.c;
   track={A:[],reg:{}};
-  for(const k in R){let F=.02*R[k].on, C=1; const dv=R[k].div, mid=2040-25*(R[k].au-.30)+6*dv, tr0=R[k].tr, nar=Math.min(.9,nar0*(1+.5*dv)), ero=ero0*(1+.5*dv); const g=track.reg[k]={F:[],act:[]};
+  for(const k in R){let F=.02*R[k].on, C=1, P=0; const dv=R[k].div, mid=2040-25*(R[k].au-.30)+6*dv, tr0=R[k].tr, nar=Math.min(.9,nar0*(1+.5*dv)), ero=ero0*(1+.5*dv); const g=track.reg[k]={F:[],act:[],E:[]};
     for(let t=0;t<N;t++){const A=amax/(1+Math.exp(-(Y0+t-mid)/6)), E=R[k].on+(Math.max(.97,R[k].on)-R[k].on)*(1-Math.exp(-t/25));
-      track.A[t]=A; g.F[t]=F; const tr=tr0+(.85-tr0)*(1-Math.exp(-t/45)); g.act[t]=Math.min(1,(.2+.62*tr)*(1+.45*A));
-      const nt=F*(.8-.7*st.k); C+=(1-C)*.06*nt-C*ero*A*E*(1-nt); const rel=(A+(1-A)*(1-C))*(1-.6*nt), T=rel*E*(nar+(1-nar)*(1-C)); F+=(T-F)*(.10+.15*conc);}}
+      track.A[t]=A; g.F[t]=F; g.E[t]=E; const tr=tr0+(.85-tr0)*(1-Math.exp(-t/45)); g.act[t]=Math.min(1,(.2+.62*tr)*(1+.45*A));
+      const nt=F*(.8-.7*st.k); C+=(1-C)*.06*nt-C*ero*A*E*(1-nt); const rel=(A+(1-A)*(1-C))*(1-.6*nt);
+      // Recursion: P is the machine-made share of what is in circulation. It only ever rises. Past a threshold (about 45%), systems feeding on
+      // their own output narrow far more per pass. st.q sets how much of that effect is let through.
+      const tip=1/(1+Math.exp(-(P-.45)/.07)), narT=nar+(.9-nar)*st.q*tip, T=rel*E*(narT+(1-narT)*(1-C)); F+=(T-F)*(.10+.15*conc); P+=Math.max(0,rel*E-P)*.12;}}
 }
 const lerp=(a,i)=>{const k=Math.floor(i),f=i-k; return a[k]+(a[Math.min(N-1,k+1)]-a[k])*f;};
 function mixHue(h,target,f){const d=((target-h+540)%360)-180; return (h+d*f+360)%360;}
 // A node is a refugium when "kept" is on and its draw falls under the regional share (more where diversity is high and time online is low).
 const isRef=n=>n.ref<.30*st.r;
 
-// ---- drawing
+// ---- drawing: thousands of hair-thin strokes; where they overlap they add up to brightness
+const RELIEF=false, THIN=.7, RH=.17, RUN=.15;   // RUN = share of threads carrying moving light at full activity      // THIN = how far the fine filaments thin out as variety is lost (0 none, 1 all)
 const cv=document.getElementById('g'), c=cv.getContext('2d');
 let S=600; function size(){const w=cv.clientWidth||600,d=Math.min(2,window.devicePixelRatio||1); S=cv.width=cv.height=Math.round(w*d);}
 const reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
 let year=Y0, playing=!reduce, last=0, hold=0, lon0=-20*D2R, lat0=18*D2R, dragging=false;
-const px=new Float32Array(nodes.length), py=new Float32Array(nodes.length), pz=new Float32Array(nodes.length), nf=new Float32Array(nodes.length);
-function proj(X,Y,Z){const sl=Math.sin(lon0),cl=Math.cos(lon0),sp=Math.sin(lat0),cp=Math.cos(lat0);
-  const x=X*cl-Z*sl, z1=X*sl+Z*cl, y=Y*cp-z1*sp, z=Y*sp+z1*cp; return [x,y,z];}
+const NN=nodes.length, px=new Float32Array(NN), py=new Float32Array(NN), pz=new Float32Array(NN), nf=new Float32Array(NN), nh=new Float32Array(NN);
 function draw(ms){
-  const t=year-Y0, tt=ms/1000, Rr=S*.44, cx=S/2, cy=S/2, conc=.35+.65*st.c;
-  const ins=st.k*(1-st.c), tgt=r=>mixHue(SYS_H[R[r].sys],FLAT_H,st.c);   // many systems + inflated confidence: each system seals itself off
-  c.clearRect(0,0,S,S);
-  const sea=c.createRadialGradient(cx-Rr*.3,cy-Rr*.35,Rr*.1,cx,cy,Rr); sea.addColorStop(0,'#1b2217'); sea.addColorStop(1,'#0a0d09');
-  c.fillStyle=sea; c.beginPath(); c.arc(cx,cy,Rr,0,6.283); c.fill();
-  c.strokeStyle='#2a3122'; c.lineWidth=S/600; c.stroke();
-  for(let k=0;k<nodes.length;k++){const n=nodes[k], p=proj(n.X,n.Y,n.Z); px[k]=cx+p[0]*Rr; py[k]=cy-p[1]*Rr; pz[k]=p[2];
-    let F=lerp(track.reg[n.r].F,t)*(.75+.5*n.lag); F=F>1?1:F; if(isRef(n)) F=Math.min(F,.06); nf[k]=F;}
-  c.lineCap='round';
-  // fur is surface variety (words): it persists, even thickens, while its colour converges (Moon et al.)
-  c.lineWidth=(S/600)*.5;
-  for(let k=0;k<nodes.length;k++){ if(pz[k]<.08) continue; const n=nodes[k], F=nf[k], fa=Math.min(.75,(.16+.34*pz[k])*(1+.3*F));
-    const act=lerp(track.reg[n.r].act,t), hue=mixHue(n.hue,tgt(n.r),F);
-    c.strokeStyle='hsl('+hue.toFixed(0)+' '+(50*(1-F)+14).toFixed(0)+'% '+(34+26*act).toFixed(0)+'% / '+fa.toFixed(2)+')';
-    c.beginPath();
-    for(let h=0;h<HN;h++){const o=(k*HN+h)*6, a1=proj(hair[o],hair[o+1],hair[o+2]), a2=proj(hair[o+3],hair[o+4],hair[o+5]);
-      c.moveTo(px[k],py[k]); c.quadraticCurveTo(cx+a1[0]*Rr,cy-a1[1]*Rr,cx+a2[0]*Rr,cy-a2[1]*Rr);}
-    c.stroke();}
-  // filaments, drawn as curves through each joint so the threads bend instead of cornering
-  for(let k=0;k<nodes.length;k++){const n=nodes[k]; if(n.par<0) continue; const z=Math.min(pz[k],pz[n.par]); if(z<.02) continue;
-    const F=nf[k], act=lerp(track.reg[n.r].act,t), fine=n.size<=3, trunk=n.size>14;
-    const target=tgt(n.r), hue=mixHue(n.hue,target,F), sat=(58*(1-F))+(32-20*st.c+22*ins)*F;
-    const pulse=reduce?1:.8+.2*Math.sin(tt*n.sp*(.5+2*act)+n.ph);
-    let alpha=(.35+.65*z)*(fine?1-.9*F*conc:1); if(ins>.02&&R[n.r].sys!==R[nodes[n.par].r].sys) alpha*=1-ins*Math.min(1,1.3*F); if(alpha<.03) continue;
-    const lum=(22+40*act)*pulse*(.55+.45*z)+8*F+12*F*st.k;
-    c.strokeStyle='hsl('+hue.toFixed(0)+' '+sat.toFixed(0)+'% '+lum.toFixed(0)+'% / '+alpha.toFixed(2)+')';
-    c.lineWidth=(S/600)*(.55+.42*Math.log2(1+n.size))*(trunk?1+.9*F*conc:1);
-    const p=n.par, g=nodes[p].par, mx=(px[p]+px[k])/2, my=(py[p]+py[k])/2;
-    c.beginPath();
-    if(g>=0){c.moveTo((px[g]+px[p])/2,(py[g]+py[p])/2); c.quadraticCurveTo(px[p],py[p],mx,my);} else {c.moveTo(px[p],py[p]); c.lineTo(mx,my);}
-    if(!n.kids) c.lineTo(px[k],py[k]);
-    c.stroke();
-    if(ins>.05&&!n.kids&&n.back>=0&&F>.08&&pz[n.back]>.02){const q=n.back, ox=-(py[q]-py[k])*.45, oy=(px[q]-px[k])*.45;
-      c.globalAlpha=Math.min(1,F*1.2)*ins; c.beginPath(); c.moveTo(px[k],py[k]); c.quadraticCurveTo((px[k]+px[q])/2+ox,(py[k]+py[q])/2+oy,px[q],py[q]); c.stroke(); c.globalAlpha=1;}}
-  // refugia and seeds glow
-  for(let k=0;k<nodes.length;k++){const n=nodes[k]; if(pz[k]<.05) continue; const ref=isRef(n); if(!ref&&!n.seed) continue;
-    const act=lerp(track.reg[n.r].act,t), F=nf[k], target=tgt(n.r);
-    c.fillStyle='hsl('+mixHue(n.hue,target,F).toFixed(0)+' '+(ref?80:70*(1-F)+20*F).toFixed(0)+'% '+(ref?66:50+20*act).toFixed(0)+'% / '+(.5+.5*pz[k]).toFixed(2)+')';
-    c.beginPath(); c.arc(px[k],py[k],(S/600)*(ref?1.7:2.4+1.5*F*conc*(hubs.includes(k)?2:0)),0,6.283); c.fill();}
-  // long strands: the peer mesh gives way to hubs as flattening and concentration rise
-  let Fbar=0,cnt=0; for(const r in track.reg){Fbar+=lerp(track.reg[r].F,t);cnt++;} Fbar/=cnt; const hubW=Math.min(1,Fbar*conc*1.25);
-  function strand(list,w,isHub){ if(w<.03) return; for(const s of list){const a=nodes[s.a]; const F=nf[s.a];
-      const target=tgt(a.r), hue=isHub?mixHue(a.hue,target,Math.max(F,.6)):mixHue(a.hue,target,F);
+  const t=year-Y0, tt=ms/1000, Rr=S*(RELIEF?.40:.44), cx=S/2, cy=S/2, u=S/600, conc=.35+.65*st.c, ins=st.k*(1-st.c);
+  const sl=Math.sin(lon0),cl=Math.cos(lon0),sp=Math.sin(lat0),cp=Math.cos(lat0);
+  c.globalCompositeOperation='source-over'; c.clearRect(0,0,S,S);
+  const sea=c.createRadialGradient(cx-Rr*.3,cy-Rr*.35,Rr*.1,cx,cy,Rr);
+  if(RELIEF){sea.addColorStop(0,'#ffffff'); sea.addColorStop(1,'#dcdad3');} else {sea.addColorStop(0,'#161c13'); sea.addColorStop(1,'#080a07');}
+  c.fillStyle=sea; c.beginPath(); c.arc(cx,cy,Rr,0,6.283); c.fill(); c.strokeStyle=RELIEF?'#b9b7ae':'#2a3122'; c.lineWidth=u; c.stroke();
+  c.strokeStyle=RELIEF?'rgba(60,70,80,.25)':'rgba(196,208,184,.36)'; c.lineWidth=u*.7; c.beginPath();
+  for(const g of coast){const p=g[0], q=g[1], w1=p[0]*sl+p[2]*cl, w2=q[0]*sl+q[2]*cl; if(p[1]*sp+w1*cp<0||q[1]*sp+w2*cp<0) continue;
+    c.moveTo(cx+(p[0]*cl-p[2]*sl)*Rr,cy-(p[1]*cp-w1*sp)*Rr); c.lineTo(cx+(q[0]*cl-q[2]*sl)*Rr,cy-(q[1]*cp-w2*sp)*Rr);}
+  c.stroke();
+  const Fr={},Ar={},Tg={},Er={}; let Fbar=0,cnt=0;
+  for(const r in R){Fr[r]=lerp(track.reg[r].F,t); Ar[r]=lerp(track.reg[r].act,t); Er[r]=lerp(track.reg[r].E,t); Tg[r]=mixHue(SYS_H[R[r].sys],FLAT_H,st.c); Fbar+=Fr[r]; cnt++;} Fbar/=cnt;
+  for(let k=0;k<NN;k++){const n=nodes[k]; let F=Fr[n.r]*(.75+.5*n.lag); if(F>1) F=1; if(isRef(n)) F=Math.min(F,.06); nf[k]=F;
+    // relief: height stands for variety and activity; it sinks as variety is lost, while hubs rise under concentration
+    let h=0; if(RELIEF){h=n.kind===2?RH*Ar[n.r]*((1-.8*F)+1.2*F*conc):RH*Ar[n.r]*(1-.8*F)*(n.kind===1?.5:.08+.14*n.fine);} nh[k]=h;
+    const x=n.X*cl-n.Z*sl, z1=n.X*sl+n.Z*cl, rad=(1+h)*Rr; px[k]=cx+x*rad; py[k]=cy-(n.Y*cp-z1*sp)*rad; pz[k]=n.Y*sp+z1*cp;}
+  c.globalCompositeOperation=RELIEF?'source-over':'lighter'; c.lineCap='butt';
+  for(let k=0;k<NN;k++){const n=nodes[k]; if(n.to<0) continue;
+    const ax=n.sx*cl-n.sz*sl, az1=n.sx*sl+n.sz*cl, x1=cx+ax*Rr, y1=cy-(n.sy*cp-az1*sp)*Rr, zs=n.sy*sp+az1*cp;
+    const ex=n.ex*cl-n.ez*sl, ez1=n.ex*sl+n.ez*cl, x2=cx+ex*Rr, y2=cy-(n.ey*cp-ez1*sp)*Rr, z=Math.min(zs,n.ey*sp+ez1*cp); if(z<.02) continue;
+    const F=nf[k], act=Ar[n.r], fine=n.kind===0;
+    let al=(fine?.10+.22*act:.14+.26*act)*(.3+.7*z);
+    // the web fills in as more of a region comes online: a thread appears once the share online passes its threshold
+    const grow=(.45+.55*Er[n.r]-n.born)/.04; if(grow<=0) continue; if(grow<1) al*=grow;
+    if(fine) al*=1-THIN*F*(.35+.65*n.fine);
+    if(ins>.02&&R[n.r].sys!==R[nodes[n.hub].r].sys) al*=1-ins*Math.min(1,1.3*F);
+    if(!reduce) al*=.85+.15*Math.sin(tt*n.sp*(.5+2*act)+n.ph);
+    if(al<.02) continue;
+    const hue=mixHue(n.hue,Tg[n.r],F), sat=62*(1-F)+(32-20*st.c+22*ins)*F;
+    al=Math.min(.9,al*(.8+.15*Math.min(2,n.lw)));
+    c.strokeStyle='hsl('+(hue|0)+' '+(sat|0)+'% '+((46+12*act-8*F+8*F*st.k)|0)+'% / '+al.toFixed(2)+')';
+    c.lineWidth=u*n.lw;
+    const w1=n.ax*sl+n.az*cl, ax2=cx+(n.ax*cl-n.az*sl)*Rr, ay2=cy-(n.ay*cp-w1*sp)*Rr, w2=n.bx*sl+n.bz*cl, bx2=cx+(n.bx*cl-n.bz*sl)*Rr, by2=cy-(n.by*cp-w2*sp)*Rr;
+    c.beginPath(); c.moveTo(x1,y1); c.bezierCurveTo(ax2,ay2,bx2,by2,x2,y2); c.stroke();
+    if(n.feather){const p01x=(x1+ax2)/2,p01y=(y1+ay2)/2,p12x=(ax2+bx2)/2,p12y=(ay2+by2)/2,p23x=(bx2+x2)/2,p23y=(by2+y2)/2,qx=(p01x+p12x)/2,qy=(p01y+p12y)/2;
+      c.beginPath(); c.moveTo(x1,y1); c.bezierCurveTo(p01x,p01y,qx,qy,(qx+(p12x+p23x)/2)/2,(qy+(p12y+p23y)/2)/2); c.stroke();}   // drawn twice near its root, so it tapers
+    // a wave of brightness travels along some threads: the filament itself swells with light over about two fifths of its length,
+    // soft at both ends. More threads carry one, and it moves faster, where activity is higher.
+    else if(!reduce&&n.run<RUN*(.3+.7*act)*(fine?1:2.2)){const L=fine?.42:.30, hd=((tt*n.sp*(fine?.07:.035)*(.4+.9*act)+n.ph)%1)*(1+L), t1=Math.min(1,hd), t0=Math.max(0,hd-L);
+      if(t1-t0>.04){c.beginPath(); let fx=0,fy=0,lx=0,ly=0;
+        for(let q=0;q<=4;q++){const t=t0+(t1-t0)*q/4, m=1-t, X=m*m*m*x1+3*m*m*t*ax2+3*m*t*t*bx2+t*t*t*x2, Y=m*m*m*y1+3*m*m*t*ay2+3*m*t*t*by2+t*t*t*y2; if(q) c.lineTo(X,Y); else {c.moveTo(X,Y); fx=X; fy=Y;} lx=X; ly=Y;}
+        const g=c.createLinearGradient(fx,fy,lx,ly), col='hsl('+(hue|0)+' '+((sat*.85)|0)+'% 76% / ', pk=(.34+.34*act)*(.3+.7*z)*Math.min(1,(t1-t0)/L*1.4);
+        g.addColorStop(0,col+'0)'); g.addColorStop(.5,col+pk.toFixed(2)+')'); g.addColorStop(1,col+'0)');
+        c.strokeStyle=g; c.lineWidth=u*(n.lw+.35); c.stroke();}}}
+  // only the dominant hubs get a mark, and only as concentration takes hold
+  for(const k of big){ if(pz[k]<.05) continue; const n=nodes[k], F=nf[k], g=F*conc; if(g<.12) continue;
+    c.fillStyle='hsl('+(mixHue(n.hue,Tg[n.r],F)|0)+' '+((60*(1-F)+14*F)|0)+'% 72% / '+(.35+.5*pz[k]).toFixed(2)+')'; c.beginPath(); c.arc(px[k],py[k],u*(.6+2.6*g),0,6.283); c.fill();}
+  if(st.r>.01) for(let k=0;k<NN;k++){const n=nodes[k]; if(n.kind||n.fine<.55||pz[k]<.05||!isRef(n)) continue;
+    c.fillStyle=RELIEF?'hsl('+(n.hue|0)+' 55% 34% / .8)':'hsl('+(n.hue|0)+' 80% 66% / '+(.4+.5*pz[k]).toFixed(2)+')'; c.beginPath(); c.arc(px[k],py[k],u*.9,0,6.283); c.fill();}
+  // long strands: the peer mesh gives way to hubs as flattening and concentration rise; sealed-off systems lose both
+  const hubW=Math.min(1,Fbar*conc*1.25), cut=1-ins*Math.min(1,1.6*Fbar);
+  function strand(list,w,isHub){ if(w<.03) return; for(const s of list){const a=nodes[s.a], F=nf[s.a];
+      const hue=isHub?mixHue(a.hue,Tg[a.r],Math.max(F,.6)):mixHue(a.hue,Tg[a.r],F);
       c.beginPath(); let pen=false, vis=0;
-      for(const p of s.pts){const q=proj(p[0],p[1],p[2]); if(q[2]<0&&Math.hypot(q[0],q[1])<1){pen=false; continue;}
-        const x=cx+q[0]*Rr,y=cy-q[1]*Rr; if(pen) c.lineTo(x,y); else c.moveTo(x,y); pen=true; vis++;}
+      for(const q of s.pts){const x=q[0]*cl-q[2]*sl, z1=q[0]*sl+q[2]*cl, y=q[1]*cp-z1*sp, z=q[1]*sp+z1*cp; if(z<0&&Math.hypot(x,y)<1){pen=false; continue;}
+        const X=cx+x*Rr, Y=cy-y*Rr; if(pen) c.lineTo(X,Y); else c.moveTo(X,Y); pen=true; vis++;}
       if(vis<2) continue;
-      c.strokeStyle='hsl('+hue.toFixed(0)+' '+(isHub?(48-24*st.c):58*(1-F)+24*F).toFixed(0)+'% '+(isHub?68:58)+'% / '+(w*(isHub?.55:.38)).toFixed(2)+')';
-      c.lineWidth=(S/600)*(isHub?(s.trunk?2.6:1.3)*(.6+hubW):.8); c.stroke();}}
-  const cut=1-ins*Math.min(1,1.6*Fbar); strand(mesh,(1-hubW*.9)*cut,false); strand(hubArcs,hubW*cut,true);
+      c.strokeStyle=RELIEF?'hsl(210 10% 28% / '+(w*(isHub?.5:.3)).toFixed(2)+')':'hsl('+(hue|0)+' '+((isHub?48-24*st.c:58*(1-F)+24*F)|0)+'% '+(isHub?66:56)+'% / '+(w*(isHub?.5:.3)).toFixed(2)+')';
+      c.lineWidth=u*(isHub?(s.trunk?1.5:.8)*(.6+hubW):.55); c.stroke();
+      if(!reduce&&w>.12) for(let rep=0;rep<(isHub?2:1);rep++){const n2=s.pts.length-1, hd=((tt*(isHub?.07:.045)+s.ph+rep*.5)%1)*(n2+5), i1=Math.min(n2,Math.floor(hd)), i0=Math.max(0,Math.floor(hd)-5); if(i1-i0<2) continue;
+        c.beginPath(); let ok=0,fx=0,fy=0,lx=0,ly=0;
+        for(let i=i0;i<=i1;i++){const q=s.pts[i], x=q[0]*cl-q[2]*sl, z1=q[0]*sl+q[2]*cl, y=q[1]*cp-z1*sp, z=q[1]*sp+z1*cp; if(z<0&&Math.hypot(x,y)<1){ok=-99; break;}
+          const X=cx+x*Rr, Y=cy-y*Rr; if(ok++) c.lineTo(X,Y); else {c.moveTo(X,Y); fx=X; fy=Y;} lx=X; ly=Y;}
+        if(ok<3) continue;
+        const g=c.createLinearGradient(fx,fy,lx,ly), col='hsl('+(hue|0)+' '+(isHub?30:50)+'% 82% / '; g.addColorStop(0,col+'0)'); g.addColorStop(.5,col+(w*.7).toFixed(2)+')'); g.addColorStop(1,col+'0)');
+        c.strokeStyle=g; c.lineWidth=u*(isHub?(s.trunk?2.1:1.3)*(.6+hubW):1); c.stroke();}}}
+  strand(mesh,(1-hubW*.9)*cut,false); strand(hubArcs,hubW*cut,true);
+  c.globalCompositeOperation='source-over';
   yrEl.textContent=Math.round(year); if(document.activeElement!==slider) slider.value=Math.round(year);
 }
 const yrEl=document.getElementById('yr'), slider=document.getElementById('year'), btn=document.getElementById('play');
 function frame(ms){const dt=Math.min(.1,(ms-last)/1000); last=ms;
   if(playing){ if(hold>0){hold-=dt; if(hold<=0) year=Y0;} else {year+=dt*1.7; if(year>=Y1){year=Y1; hold=5;}} }
-  if(!dragging&&!reduce) lon0-=dt*5*D2R;
+  if(!dragging&&!reduce) lon0-=dt*2.5*D2R;
   draw(ms); requestAnimationFrame(frame);}
 // ---- controls
-const KEYS=[['sA','a'],['sN','n'],['sE','e'],['sK','k'],['sC','c'],['sR','r']], PK=['a','n','e','k','c'];
+const KEYS=[['sA','a'],['sN','n'],['sE','e'],['sQ','q'],['sK','k'],['sC','c'],['sR','r']], PK=['a','n','e','q','k','c'];
 function sync(){
   KEYS.forEach(([id,key])=>{document.getElementById(id).value=Math.round(st[key]*100);});
-  document.querySelectorAll('#presets button').forEach(b=>b.setAttribute('aria-pressed',String(PK.every(q=>b.dataset[q]===undefined||Math.abs(+b.dataset[q]-st[q])<.02))));
+  // Each future glows in proportion to how closely the sliders match it; an exact match is fully lit and the others go dark.
+  const bs=[...document.querySelectorAll('#presets button')].map(b=>{const ks=PK.filter(q=>b.dataset[q]!==undefined), d=ks.reduce((s,q)=>s+Math.abs(+b.dataset[q]-st[q]),0)/ks.length;
+    return {b,d,hit:ks.every(q=>Math.abs(+b.dataset[q]-st[q])<.02)};}).sort((x,y)=>x.d-y.d);
+  const near=bs[0], reveal=Math.min(1,near.d/.08);
+  bs.forEach((o,i)=>{const g=o.hit?1:Math.pow(Math.max(0,1-o.d/.5),1.6)*(i?reveal:1); o.b.setAttribute('aria-pressed',String(o.hit)); o.b.style.setProperty('--g',g.toFixed(3));});
+  const pd=document.getElementById('pdesc'); pd.textContent=near.hit?near.b.dataset.d:pd.dataset.custom+(near.d<.4?' Closest to '+near.b.textContent+'.':'');
   compute();
 }
 KEYS.forEach(([id,key])=>document.getElementById(id).addEventListener('input',e=>{st[key]=e.target.value/100; sync();}));
