@@ -11,10 +11,13 @@ body{font-family:var(--mono);display:flex;flex-direction:column;min-height:100sv
 header{position:relative;z-index:1;padding:28px clamp(18px,4vw,56px) 0;display:flex;flex-direction:column;align-items:flex-start;gap:10px}
 h1{font-family:var(--display);font-weight:300;font-size:clamp(1.7rem,3.6vw,2.8rem);line-height:1.06;margin:0;letter-spacing:.005em;text-wrap:balance;max-width:15ch}
 .sub{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-.hero{flex:1;min-height:0;position:relative;display:grid;place-items:center;padding:12px}
-.hero img{position:absolute;inset:0;margin:auto;width:min(74vmin,720px);height:min(74vmin,720px);object-fit:contain;opacity:0;transition:opacity 2.4s ease}
+.hero{flex:1;min-height:240px;position:relative;display:grid;place-items:center;padding:12px}
+.hero > img,.flank{--d:min(74vmin,720px)}
+/* size the dish to the space actually left between title and menu, so it never covers the menu on short windows */
+@supports (height:1cqh){.hero{container-type:size}.hero > img,.flank{--d:min(100cqh,74vmin,720px)}}
+.hero img{position:absolute;inset:0;margin:auto;width:var(--d);height:var(--d);object-fit:contain;opacity:0;transition:opacity 2.4s ease}
 .hero img.on{opacity:1}
-.flank{--half:min(37vmin,360px);--gap:26px;position:absolute;top:50%;transform:translateY(-50%);height:min(50vmin,440px);
+.flank{--half:calc(var(--d)/2);--gap:26px;position:absolute;top:50%;transform:translateY(-50%);height:min(calc(var(--d)*.68),440px);
   width:min(23vw,330px,calc(50vw - var(--half) - var(--gap) - 18px))}
 /* each panel sits just outside the dish and its diagram hugs the inner edge */
 .flank.l{right:calc(50% + var(--half) + var(--gap))} .flank.r{left:calc(50% + var(--half) + var(--gap))}
@@ -24,7 +27,7 @@ h1{font-family:var(--display);font-weight:300;font-size:clamp(1.7rem,3.6vw,2.8re
 .hero .flank img.on{opacity:.62}
 @media (max-width:1100px){.flank{display:none}}
 .hero .empty{color:var(--muted);font-size:.8rem;border:1px dashed var(--line);padding:18px 22px;max-width:44ch;text-align:center;line-height:1.5}
-nav{padding:0 clamp(18px,4vw,56px) 22px;display:flex;flex-wrap:wrap;gap:14px clamp(18px,3.4vw,44px);justify-content:center}
+nav{position:relative;z-index:1;padding:0 clamp(18px,4vw,56px) 22px;display:flex;flex-wrap:wrap;gap:14px clamp(18px,3.4vw,44px);justify-content:center}
 nav a{color:var(--ink);text-decoration:none;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;display:inline-flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid transparent}
 nav a::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--c)}
 nav a:hover,nav a:focus-visible{border-bottom-color:var(--c);outline:none}
